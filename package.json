@@ -1,0 +1,26 @@
+{
+  "name": "upzy",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json}\""
+  },
+  "devDependencies": {
+    "@upzy/eslint-config": "workspace:*",
+    "@upzy/typescript-config": "workspace:*",
+    "prettier": "^3.5.1",
+    "turbo": "^2.4.2",
+    "typescript": "5.7.3"
+  },
+  "packageManager": "bun@1.2.13",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
