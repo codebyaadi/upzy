@@ -1,0 +1,3 @@
+{
+  "extends": "@upzy/typescript-config/base.json"
+}
