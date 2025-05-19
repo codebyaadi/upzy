@@ -6,7 +6,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json}\"",
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
     "@upzy/eslint-config": "workspace:*",
