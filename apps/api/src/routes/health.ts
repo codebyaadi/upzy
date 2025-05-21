@@ -17,7 +17,7 @@ async function healthRoutes(fastify: FastifyInstance) {
         },
       },
     },
-    async (request, reply) => {
+    async () => {
       return {
         status: "ok",
         uptime: process.uptime(),
