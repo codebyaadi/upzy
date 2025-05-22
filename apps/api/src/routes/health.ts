@@ -23,7 +23,7 @@ async function healthRoutes(fastify: FastifyInstance) {
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
       };
-    },
+    }
   );
 }
 
