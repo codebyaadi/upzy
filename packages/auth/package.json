@@ -1,0 +1,25 @@
+{
+  "name": "@upzy/auth",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "auth:generate": "bunx @better-auth/cli generate --config src/server.ts --output ../db/src/schema/auth.ts",
+    "auth:migrate": "bunx @better-auth/cli@latest migrate --config src/server.ts",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "5.7.3",
+    "@upzy/eslint-config": "workspace:*",
+    "@upzy/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "better-auth": "^1.2.8",
+    "@upzy/db": "workspace:*"
+  },
+  "exports": {
+    "./client.ts": "./src/client.ts",
+    "./server.ts": "./src/server.ts"
+  }
+}
