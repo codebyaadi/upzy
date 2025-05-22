@@ -10,12 +10,13 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^22.15.19",
+    "@types/node": "^20",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.7.3",
     "@upzy/eslint-config": "workspace:^",
-    "@upzy/typescript-config": "workspace:*"
+    "@upzy/typescript-config": "workspace:*",
+    "@upzy/prettier-config": "workspace:*"
   },
   "dependencies": {
     "fastify": "^5.3.3"
