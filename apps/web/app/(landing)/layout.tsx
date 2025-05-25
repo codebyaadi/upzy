@@ -7,9 +7,8 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative pt-16">
+    <div className="relative">
       <Navbar />
-      <div className="absolute top-0 h-1/3 w-full" />
       {children}
     </div>
   );
