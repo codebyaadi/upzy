@@ -7,7 +7,7 @@ const links = {
 };
 
 export const siteConfig = {
-  name: "upzy",
+  name: "Upzy",
   description: "",
   url: "https://",
   ogImage: "https://",
