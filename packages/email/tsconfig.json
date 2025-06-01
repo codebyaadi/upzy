@@ -1,0 +1,12 @@
+{
+  "extends": "@upzy/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@upzy/email/*": ["./src/*"]
+    },
+    "jsx": "react-jsx"
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}

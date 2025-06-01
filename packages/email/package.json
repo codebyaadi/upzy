@@ -1,0 +1,32 @@
+{
+  "name": "@upzy/email",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "email dev --dir ./src/templates --port 3001",
+    "docker:up": "docker compose up -d || docker-compose up -d"
+  },
+  "devDependencies": {
+    "@upzy/eslint-config": "workspace:^",
+    "@upzy/typescript-config": "workspace:*",
+    "@upzy/ui": "workspace:*",
+    "@types/bun": "latest",
+    "tsx": "^4.19.4",
+    "typescript": "5.7.3",
+    "@types/nodemailer": "^6.4.17",
+    "react-email": "4.0.15"
+  },
+  "dependencies": {
+    "@react-email/components": "0.0.41",
+    "nodemailer": "^7.0.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./templates/*": "./src/templates/*.tsx",
+    "./lib/*": "./src/lib/*.ts",
+    "./types": "./src/types/index.ts"
+  }
+}
