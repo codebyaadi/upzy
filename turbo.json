@@ -13,6 +13,10 @@
     "check-types": {
       "dependsOn": ["^check-types"]
     },
+    "docker:up": {
+      "cache": false,
+      "dependsOn": ["^docker:up"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
