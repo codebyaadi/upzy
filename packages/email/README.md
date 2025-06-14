@@ -1,4 +1,4 @@
-# api
+# email
 
 To install dependencies:
 
