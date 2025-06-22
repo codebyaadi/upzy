@@ -2,6 +2,9 @@
   "extends": "@upzy/typescript-config/nestjs.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "@upzy/auth/*": ["../../packages/auth/dist/*"]
+    }
   }
 }
