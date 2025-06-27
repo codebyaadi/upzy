@@ -1,4 +1,4 @@
-import PasswordResetEmail from "../templates/PasswordEmailReset";
+import PasswordResetEmail from "../templates/PasswordResetEmail";
 import WelcomeEmail from "../templates/WelcomeEmail";
 
 // Define a type for mapping template names to their React components and props

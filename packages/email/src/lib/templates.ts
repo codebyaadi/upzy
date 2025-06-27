@@ -1,4 +1,4 @@
-import PasswordResetEmail from "../templates/PasswordEmailReset";
+import PasswordResetEmail from "../templates/PasswordResetEmail";
 import WelcomeEmail from "../templates/WelcomeEmail";
 import { EmailTemplates } from "../types";
 

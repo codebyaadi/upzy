@@ -10,38 +10,40 @@ import {
   Hr,
 } from "@react-email/components";
 
-interface WelcomeEmailProps {
+interface PasswordResetEmailProps {
   userName?: string;
-  ctaUrl?: string;
+  resetUrl?: string;
 }
 
-const WelcomeEmail = ({
+const PasswordResetEmail = ({
   userName = "there",
-  ctaUrl = "https://upzy.dev/login",
-}: WelcomeEmailProps) => (
+  resetUrl = "https://upzy.dev/reset-password",
+}: PasswordResetEmailProps) => (
   <Html lang="en">
     <Head>
-      {/* Load Google Fonts: Outfit for headings, Inter for body */}
       <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@600;700&display=swap"
         rel="stylesheet"
       />
     </Head>
     <Body style={styles.body}>
       <Container style={styles.container}>
-        <Text style={styles.heading}>Welcome to Upzy, {userName} 👋</Text>
+        <Text style={styles.heading}>Reset Your Password</Text>
         <Text style={styles.paragraph}>
-          Never miss a beat when your site goes down. With Upzy, you're always one step ahead.
+          Hello {userName}, we received a request to reset your Upzy password.
+        </Text>
+        <Text style={styles.paragraph}>
+          Click the button below to create a new password. This link is valid for 30 minutes.
         </Text>
 
         <Section style={styles.buttonContainer}>
-          <Button style={styles.button} href={ctaUrl}>
-            Get Started
+          <Button style={styles.button} href={resetUrl}>
+            Reset Password
           </Button>
         </Section>
 
         <Text style={styles.paragraph}>
-          Have questions? Just reply to this email — we're here to help.
+          Didn’t request this? You can safely ignore this email.
         </Text>
 
         <Hr style={styles.hr} />
@@ -58,8 +60,8 @@ const styles = {
     backgroundColor: "#0d0d0d",
     color: "#f4f4f5",
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-    padding: "0",
-    margin: "0",
+    padding: 0,
+    margin: 0,
   },
   container: {
     backgroundColor: "#121212",
@@ -71,19 +73,19 @@ const styles = {
   },
   heading: {
     fontFamily: "'Outfit', sans-serif",
-    fontSize: "26px",
+    fontSize: "22px",
     fontWeight: 700,
     textAlign: "center" as const,
     color: "#ffffff",
-    marginBottom: "20px",
+    marginBottom: "24px",
   },
   paragraph: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "16px",
-    lineHeight: "28px",
+    lineHeight: "26px",
     textAlign: "center" as const,
     color: "#cccccc",
-    marginBottom: "20px",
+    marginBottom: "16px",
   },
   buttonContainer: {
     textAlign: "center" as const,
@@ -111,4 +113,4 @@ const styles = {
   },
 };
 
-export default WelcomeEmail;
+export default PasswordResetEmail;
