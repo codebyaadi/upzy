@@ -1,6 +1,6 @@
-import WelcomeEmail from "@upzy/email/templates/WelcomeEmail";
-import PasswordResetEmail from "@upzy/email/templates/PasswordEmailReset";
-import { EmailTemplates } from "@upzy/email/types";
+import PasswordResetEmail from "../templates/PasswordEmailReset";
+import WelcomeEmail from "../templates/WelcomeEmail";
+import { EmailTemplates } from "../types";
 
 // Map template names to their components
 export const TEMPLATES: EmailTemplates = {

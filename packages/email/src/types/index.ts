@@ -1,5 +1,5 @@
-import WelcomeEmail from "@upzy/email/templates/WelcomeEmail";
-import PasswordResetEmail from "@upzy/email/templates/PasswordEmailReset";
+import PasswordResetEmail from "../templates/PasswordEmailReset";
+import WelcomeEmail from "../templates/WelcomeEmail";
 
 // Define a type for mapping template names to their React components and props
 export type EmailTemplates = {

@@ -1,8 +1,8 @@
 import * as React from "react";
 import nodemailer from "nodemailer";
-import { renderEmail } from "@upzy/email/lib/render";
-import { EmailTemplates } from "@upzy/email/types";
-import { TEMPLATES } from "@upzy/email/lib/templates";
+import { EmailTemplates } from "./types";
+import { TEMPLATES } from "./lib/templates";
+import { renderEmail } from "./lib/render";
 
 /**
  * Sends an email using a specified React Email template.
