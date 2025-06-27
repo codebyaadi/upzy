@@ -2,6 +2,9 @@
 
 Upzy is a modern uptime and performance monitoring platform inspired by BetterStack — but built to go further. It provides fast, reliable uptime checks, smart incident alerts, and is designed with a scalable microservices-first architecture using Turborepo.
 
+<img width="960" alt="upzy-og" src="https://github.com/user-attachments/assets/0c78b078-c9ee-428a-87e1-32d959a6217e" />
+
+
 ## 🚀 Features
 
 - 🔍 **Uptime Monitoring** — Track the availability of websites, APIs, and services in real-time.
@@ -15,12 +18,13 @@ Upzy is a modern uptime and performance monitoring platform inspired by BetterSt
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js
+- **Frontend**: Next.js (App Router)
 - **Backend**: NestJS (Node.js)
+- **Auth**: Better Auth
+- **Database**: PostgreSQL with Drizzle ORM
 - **Emails**: React Email + Nodemailer
-- **Database**: PostgreSQL
-- **Monorepo Tooling**: Turborepo
-- **Planned**: Golang services, Redis, Kafka, k8s
+- **Monorepo Tooling**: Turborepo + Bun
+- **Planned**: Golang microservices, Redis (caching), Kafka (event streaming)
 
 ## 🔧 Installation
 
