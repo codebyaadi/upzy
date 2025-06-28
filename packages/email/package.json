@@ -28,20 +28,20 @@
   "types": "./src/index.ts",
   "exports": {
     ".": {
-      "default": "./dist/index.js",
-      "types": "./src/index.ts"
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./templates/*": {
-      "default": "./dist/templates/*.js",
-      "types": "./src/templates/*.tsx"
+      "types": "./src/templates/*.tsx",
+      "default": "./dist/templates/*.js"
     },
     "./lib/*": {
-      "default": "./dist/lib/*.js",
-      "types": "./src/lib/*.ts"
+      "types": "./src/lib/*.ts",
+      "default": "./dist/lib/*.js"
     },
     "./types": {
-      "default": "./dist/types/index.js",
-      "types": "./src/types/index.ts"
+      "types": "./src/types/index.ts",
+      "default": "./dist/types/index.js"
     }
   }
 }
