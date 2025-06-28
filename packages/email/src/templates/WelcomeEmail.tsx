@@ -31,7 +31,8 @@ const WelcomeEmail = ({
       <Container style={styles.container}>
         <Text style={styles.heading}>Welcome to Upzy, {userName} 👋</Text>
         <Text style={styles.paragraph}>
-          Never miss a beat when your site goes down. With Upzy, you're always one step ahead.
+          Never miss a beat when your site goes down. With Upzy, you're always
+          one step ahead.
         </Text>
 
         <Section style={styles.buttonContainer}>

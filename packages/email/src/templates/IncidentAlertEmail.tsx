@@ -10,15 +10,17 @@ import {
   Hr,
 } from "@react-email/components";
 
-interface PasswordResetEmailProps {
-  userName?: string;
-  resetUrl?: string;
+interface IncidentAlertEmailProps {
+  monitorName?: string;
+  downTime?: string;
+  statusPageUrl?: string;
 }
 
-const PasswordResetEmail = ({
-  userName = "there",
-  resetUrl = "https://upzy.dev/reset-password",
-}: PasswordResetEmailProps) => (
+const IncidentAlertEmail = ({
+  monitorName = "api.upzy.dev",
+  downTime = "June 27, 2025, 10:42 PM UTC",
+  statusPageUrl = "https://upzy.dev/status",
+}: IncidentAlertEmailProps) => (
   <Html lang="en">
     <Head>
       <link
@@ -28,25 +30,18 @@ const PasswordResetEmail = ({
     </Head>
     <Body style={styles.body}>
       <Container style={styles.container}>
-        <Text style={styles.heading}>Reset Your Password</Text>
+        <Text style={styles.heading}>🚨 Incident Detected</Text>
         <Text style={styles.paragraph}>
-          Hello {userName}, we received a request to reset your Upzy password.
+          One of your monitors just went down: <strong>{monitorName}</strong>
         </Text>
         <Text style={styles.paragraph}>
-          Click the button below to create a new password. This link is valid
-          for 30 minutes.
+          <strong>Time:</strong> {downTime}
         </Text>
-
         <Section style={styles.buttonContainer}>
-          <Button style={styles.button} href={resetUrl}>
-            Reset Password
+          <Button style={styles.button} href={statusPageUrl}>
+            View Incident
           </Button>
         </Section>
-
-        <Text style={styles.paragraph}>
-          Didn’t request this? You can safely ignore this email.
-        </Text>
-
         <Hr style={styles.hr} />
         <Text style={styles.footer}>
           © {new Date().getFullYear()} Upzy — Monitoring made better.
@@ -77,7 +72,7 @@ const styles = {
     fontSize: "22px",
     fontWeight: 700,
     textAlign: "center" as const,
-    color: "#ffffff",
+    color: "#ff4d4f",
     marginBottom: "24px",
   },
   paragraph: {
@@ -114,4 +109,4 @@ const styles = {
   },
 };
 
-export default PasswordResetEmail;
+export default IncidentAlertEmail;

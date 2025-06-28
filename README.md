@@ -4,7 +4,6 @@ Upzy is a modern uptime and performance monitoring platform inspired by BetterSt
 
 <img width="960" alt="upzy-og" src="https://github.com/user-attachments/assets/0c78b078-c9ee-428a-87e1-32d959a6217e" />
 
-
 ## 🚀 Features
 
 - 🔍 **Uptime Monitoring** — Track the availability of websites, APIs, and services in real-time.
@@ -14,7 +13,6 @@ Upzy is a modern uptime and performance monitoring platform inspired by BetterSt
 - 📊 **Historical Logs** — Access uptime/downtime history and monitor performance over time (coming soon).
 - 🧠 **Incident Timeline** — Automatically track when an incident starts, escalates, and resolves (planned).
 - 🌐 **Public Status Pages** — Share uptime stats publicly with beautiful custom pages (planned).
-
 
 ## 🛠️ Tech Stack
 
@@ -29,12 +27,14 @@ Upzy is a modern uptime and performance monitoring platform inspired by BetterSt
 ## 🔧 Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/codebyaadi/upzy.git
 cd upzy
 ```
 
 2. Install dependencies:
+
 ```bash
 bun install
 ```
@@ -42,6 +42,7 @@ bun install
 3. Set up environment variables:
 
 - For **apps/api** (NestJS):
+
 ```bash
 cd apps/api
 cp .env.example .env
@@ -49,6 +50,7 @@ cp .env.example .env
 ```
 
 - For **apps/web** (Next.js):
+
 ```bash
 cd apps/web
 cp .env.example .env
@@ -58,16 +60,17 @@ cp .env.example .env
 ## 🚀 Running the Application
 
 Start all services in dev mode:
+
 ```bash
 bun run dev
 ```
 
 ## 🤝 Contributing
 
-1. Fork the repository  
-2. Create your feature branch (`git checkout -b feature/awesome-feature`)  
-3. Commit your changes (`git commit -m 'Add awesome feature'`)  
-4. Push to the branch (`git push origin feature/awesome-feature`)  
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/awesome-feature`)
+3. Commit your changes (`git commit -m 'Add awesome feature'`)
+4. Push to the branch (`git push origin feature/awesome-feature`)
 5. Open a Pull Request
 
 ## 📝 License
@@ -80,6 +83,6 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 
 ## 🙏 Acknowledgments
 
-- Inspired by BetterStack and other dev tools  
-- Built with passion for reliability and DX  
+- Inspired by BetterStack and other dev tools
+- Built with passion for reliability and DX
 - Powered by modern open-source stacks

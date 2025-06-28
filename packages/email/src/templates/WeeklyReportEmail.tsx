@@ -5,20 +5,24 @@ import {
   Body,
   Container,
   Text,
-  Button,
   Section,
   Hr,
+  Button,
 } from "@react-email/components";
 
-interface PasswordResetEmailProps {
-  userName?: string;
-  resetUrl?: string;
+interface WeeklyReportEmailProps {
+  uptime?: string;
+  downtimeEvents?: number;
+  topMonitor?: string;
+  reportUrl?: string;
 }
 
-const PasswordResetEmail = ({
-  userName = "there",
-  resetUrl = "https://upzy.dev/reset-password",
-}: PasswordResetEmailProps) => (
+const WeeklyReportEmail = ({
+  uptime = "99.98%",
+  downtimeEvents = 2,
+  topMonitor = "api.upzy.dev",
+  reportUrl = "https://upzy.dev/dashboard/reports",
+}: WeeklyReportEmailProps) => (
   <Html lang="en">
     <Head>
       <link
@@ -28,24 +32,32 @@ const PasswordResetEmail = ({
     </Head>
     <Body style={styles.body}>
       <Container style={styles.container}>
-        <Text style={styles.heading}>Reset Your Password</Text>
+        <Text style={styles.heading}>📈 Your Weekly Uptime Summary</Text>
+
         <Text style={styles.paragraph}>
-          Hello {userName}, we received a request to reset your Upzy password.
-        </Text>
-        <Text style={styles.paragraph}>
-          Click the button below to create a new password. This link is valid
-          for 30 minutes.
+          Here's how your monitors performed this week:
         </Text>
 
-        <Section style={styles.buttonContainer}>
-          <Button style={styles.button} href={resetUrl}>
-            Reset Password
-          </Button>
+        <Section style={styles.metricBox}>
+          <Text style={styles.metricLabel}>Overall Uptime</Text>
+          <Text style={styles.metricValue}>{uptime}</Text>
         </Section>
 
-        <Text style={styles.paragraph}>
-          Didn’t request this? You can safely ignore this email.
-        </Text>
+        <Section style={styles.metricBox}>
+          <Text style={styles.metricLabel}>Downtime Events</Text>
+          <Text style={styles.metricValue}>{downtimeEvents}</Text>
+        </Section>
+
+        <Section style={styles.metricBox}>
+          <Text style={styles.metricLabel}>Top Performing Monitor</Text>
+          <Text style={styles.metricValue}>{topMonitor}</Text>
+        </Section>
+
+        <Section style={styles.buttonContainer}>
+          <Button style={styles.button} href={reportUrl}>
+            View Full Report
+          </Button>
+        </Section>
 
         <Hr style={styles.hr} />
         <Text style={styles.footer}>
@@ -60,7 +72,7 @@ const styles = {
   body: {
     backgroundColor: "#0d0d0d",
     color: "#f4f4f5",
-    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+    fontFamily: "'Inter', sans-serif",
     padding: 0,
     margin: 0,
   },
@@ -68,7 +80,7 @@ const styles = {
     backgroundColor: "#121212",
     borderRadius: "12px",
     padding: "40px 30px",
-    maxWidth: "520px",
+    maxWidth: "540px",
     margin: "40px auto",
     border: "1px solid #222",
   },
@@ -86,11 +98,30 @@ const styles = {
     lineHeight: "26px",
     textAlign: "center" as const,
     color: "#cccccc",
+    marginBottom: "24px",
+  },
+  metricBox: {
+    backgroundColor: "#1a1a1a",
+    borderRadius: "8px",
+    padding: "16px 24px",
     marginBottom: "16px",
+    textAlign: "center" as const,
+  },
+  metricLabel: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "14px",
+    color: "#aaa",
+    marginBottom: "4px",
+  },
+  metricValue: {
+    fontFamily: "'Outfit', sans-serif",
+    fontSize: "18px",
+    fontWeight: 600,
+    color: "#fff",
   },
   buttonContainer: {
     textAlign: "center" as const,
-    margin: "32px 0",
+    marginTop: "32px",
   },
   button: {
     fontFamily: "'Inter', sans-serif",
@@ -114,4 +145,4 @@ const styles = {
   },
 };
 
-export default PasswordResetEmail;
+export default WeeklyReportEmail;
