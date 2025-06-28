@@ -1,5 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { createDatabase } from '@upzy/db';
 import { DatabaseService } from './database.service';
 
 @Global()
@@ -9,8 +10,8 @@ import { DatabaseService } from './database.service';
     {
       provide: 'DATABASE',
       useFactory: (configService: ConfigService) => {
-        const { createDatabase } = require('@upzy/db');
-        return createDatabase(configService.get<string>('DATABASE_URL'));
+        // const { createDatabase } = require('@upzy/db');
+        return createDatabase(configService.get<string>('DATABASE_URL') || '');
       },
       inject: [ConfigService],
     },
