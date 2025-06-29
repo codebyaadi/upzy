@@ -25,22 +25,22 @@
     "react-dom": "19.1.0"
   },
   "main": "./dist/index.js",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
     "./templates/*": {
-      "types": "./src/templates/*.tsx",
+      "types": "./dist/templates/*.d.ts",
       "default": "./dist/templates/*.js"
     },
     "./lib/*": {
-      "types": "./src/lib/*.ts",
+      "types": "./dist/lib/*.d.ts",
       "default": "./dist/lib/*.js"
     },
     "./types": {
-      "types": "./src/types/index.ts",
+      "types": "./dist/types/index.d.ts",
       "default": "./dist/types/index.js"
     }
   }
