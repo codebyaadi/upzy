@@ -1,6 +1,8 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, number } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { magicLink } from "better-auth/plugins";
 import { createDatabase, schema } from "@upzy/db";
+import { sendEmail } from "@upzy/email";
 
 export interface AuthConfig {
   databaseUrl: string;
@@ -21,6 +23,16 @@ export function createAuth(config: AuthConfig) {
     emailAndPassword: {
       enabled: true,
     },
+    plugins: [
+      magicLink({
+        sendMagicLink: async ({ email, token, url }, request) => {
+          await sendEmail(email, "Here is your magic link", "MagicLinkEmail", {
+            userName: email,
+            loginUrl: url,
+          });
+        },
+      }),
+    ],
     trustedOrigins: config.trustedOrigins || [
       process.env.NEXT_PUBLIC_BASE_URL!, // Next.js frontend
       process.env.NEXT_PUBLIC_BACKEND_URL!, // NestJS backend
