@@ -31,7 +31,6 @@ export class AuthController {
     // GET /api/auth/callback/google
     // GET /api/auth/callback/github
     // etc.
-    console.log('API:PACK: ', process.env.DATABASE_URL!);
     return this.authService.handleAuthRequest(request, reply);
   }
 }

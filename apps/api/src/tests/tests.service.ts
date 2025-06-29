@@ -1,5 +1,6 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { Database, schema } from '@upzy/db';
+import { sendEmail } from '@upzy/email';
 
 interface CreateTestData {
   id: string;
@@ -19,6 +20,11 @@ export class TestsService {
       const now = new Date();
 
       this.logger.debug(`Inserting into database at: ${now.toISOString()}`);
+
+      await sendEmail('test@mail.com', 'Test Welcome Mail', 'WelcomeEmail', {
+        userName: 'hello',
+        ctaUrl: 'http://lo.com',
+      });
 
       const [result] = await this.db
         .insert(schema.tests)
