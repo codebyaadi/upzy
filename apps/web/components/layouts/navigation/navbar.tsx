@@ -3,8 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@upzy/ui/components/button";
-import { siteConfig } from "@/config/site";
-import { authClient } from "@upzy/auth/client.ts";
+import { authClient } from "@upzy/auth/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
