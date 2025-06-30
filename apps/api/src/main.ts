@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { ConfigService } from '@nestjs/config';
+import { AppModule } from './app.module';
+import { EnvType } from './config/env.schema';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -11,8 +13,12 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true, trustProxy: true }),
   );
 
+  const configService = app.get(ConfigService<EnvType>);
+
   app.enableCors({
-    origin: ['http://localhost:3000'].filter(Boolean) as string[],
+    origin: [configService.get('NEXT_PUBLIC_BASE_URL')].filter(
+      Boolean,
+    ) as string[],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: [
@@ -23,6 +29,6 @@ async function bootstrap() {
       'Origin',
     ],
   });
-  await app.listen(process.env.PORT ?? 8000);
+  await app.listen(Number(configService.get('PORT')) ?? 8000);
 }
 bootstrap();
