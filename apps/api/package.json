@@ -25,11 +25,12 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-fastify": "^11.1.3",
-    "@upzy/db": "workspace:*",
     "@upzy/auth": "workspace:*",
+    "@upzy/db": "workspace:*",
     "@upzy/email": "workspace:*",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@upzy/typescript-config": "workspace:*",

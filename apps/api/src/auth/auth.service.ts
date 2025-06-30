@@ -2,19 +2,20 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { FastifyRequest, FastifyReply } from 'fastify';
 import { Auth, AuthConfig, createAuth } from '@upzy/auth';
+import { EnvType } from '../config/env.schema';
 
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   private readonly auth: Auth;
 
-  constructor(private configService: ConfigService) {
+  constructor(private configService: ConfigService<EnvType>) {
     // Initialize auth with config from NestJS ConfigService
     const authConfig: AuthConfig = {
-      databaseUrl: this.configService.get<string>('DATABASE_URL')!,
+      databaseUrl: this.configService.getOrThrow('DATABASE_URL'),
       trustedOrigins: [
-        'http://localhost:3000', // Next.js frontend
-        'http://localhost:8000', // NestJS backend
+        this.configService.getOrThrow('NEXT_PUBLIC_BASE_URL'),
+        this.configService.getOrThrow('NEXT_PUBLIC_BACKEND_URL'),
       ],
     };
 

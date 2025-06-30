@@ -1,17 +1,17 @@
 import { Module, Global } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { createDatabase } from '@upzy/db';
 import { DatabaseService } from './database.service';
+import { EnvType } from '../config/env.schema';
 
 @Global()
 @Module({
-  imports: [ConfigModule],
   providers: [
     {
       provide: 'DATABASE',
-      useFactory: (configService: ConfigService) => {
+      useFactory: (configService: ConfigService<EnvType>) => {
         // const { createDatabase } = require('@upzy/db');
-        return createDatabase(configService.get<string>('DATABASE_URL') || '');
+        return createDatabase(configService.get('DATABASE_URL') || '');
       },
       inject: [ConfigService],
     },
