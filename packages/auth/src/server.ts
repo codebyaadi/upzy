@@ -1,7 +1,7 @@
-import { betterAuth, number } from "better-auth";
+import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { magicLink } from "better-auth/plugins";
-import { createDatabase, schema } from "@upzy/db";
+import { magicLink, organization } from "better-auth/plugins";
+import { createDatabase, authSchema } from "@upzy/db";
 import { sendEmail } from "@upzy/email";
 
 export interface AuthConfig {
@@ -14,11 +14,9 @@ export function createAuth(config: AuthConfig) {
     database: drizzleAdapter(createDatabase(config.databaseUrl), {
       provider: "pg",
       schema: {
-        user: schema.users,
-        session: schema.sessions,
-        account: schema.accounts,
-        verification: schema.verifications,
+        ...authSchema,
       },
+      usePlural: true,
     }),
     emailAndPassword: {
       enabled: true,
@@ -30,6 +28,12 @@ export function createAuth(config: AuthConfig) {
             userName: email,
             loginUrl: url,
           });
+        },
+      }),
+      organization({
+        teams: {
+          enabled: true,
+          maximumTeams: 10,
         },
       }),
     ],

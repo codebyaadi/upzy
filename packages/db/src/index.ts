@@ -4,4 +4,4 @@ export * from "./schema";
 /**
  * Named exports for specific schema parts
  */
-export * as authSchema from "./schema/auth"
+export * as authSchema from "./schema/auth";
