@@ -3,17 +3,29 @@ import { getSessionCookie } from "better-auth/cookies";
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
 
-  // THIS IS NOT SECURE!
-  // This is the recommended approach to optimistically redirect users
-  // We recommend handling auth checks in each page/route
-  if (!sessionCookie) {
+  // If there's no session cookie (user is not logged in)
+  // and they are trying to access a protected route, redirect them to the home page.
+  // We're assuming "/" is your public home page or login page for unauthenticated users.
+  if (!sessionCookie && pathname.startsWith("/dashboard")) {
+    // THIS IS NOT SECURE!
+    // This is the recommended approach to optimistically redirect users
+    // We recommend handling auth checks in each page/route
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // If there is a session cookie (user is logged in)
+  // and they are trying to access /signin or /signup, redirect them to the dashboard.
+  if (sessionCookie && (pathname === "/signin" || pathname === "/signup")) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard"], // Specify the routes the middleware applies to
+  // Specify the routes the middleware applies to
+  // This will run the middleware for /dashboard, /signin, and /signup
+  matcher: ["/dashboard", "/signin", "/signup"],
 };
