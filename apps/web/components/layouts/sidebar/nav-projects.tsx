@@ -1,10 +1,13 @@
+// nav-projects.tsx
 "use client";
 
 import {
-  Folder,
-  Forward,
-  MoreHorizontal,
+  FolderOpen, // Consistent icon for groups
+  FileScan, // For "Run Scan" (assuming FileScan is available)
+  Eye, // For "View Details"
   Trash2,
+  MoreHorizontal,
+  PlusCircle, // For "Add New Group"
   type LucideIcon,
 } from "lucide-react";
 
@@ -26,6 +29,7 @@ import {
 } from "@upzy/ui/components/sidebar";
 
 export function NavProjects({
+  // Keeping prop name 'projects' but conceptualizing as 'groups'
   projects,
 }: {
   projects: {
@@ -38,21 +42,23 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>Asset & Scan Groups</SidebarGroupLabel>{" "}
+      {/* Updated label */}
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <a href={item.url}>
                 <item.icon />
-                <span>{item.name}</span>
+                <span className="text-xs">{item.name}</span>
               </a>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
                   <MoreHorizontal />
-                  <span className="sr-only">More</span>
+                  <span className="sr-only">Group Actions</span>{" "}
+                  {/* Updated sr-only */}
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -61,17 +67,19 @@ export function NavProjects({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <Folder className="text-muted-foreground" />
-                  <span>View Project</span>
+                  <Eye className="text-muted-foreground mr-2 h-4 w-4" />{" "}
+                  {/* Added mr-2 and h-4 w-4 for consistency */}
+                  <span>View Group Details</span> {/* Updated text */}
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
-                  <span>Share Project</span>
+                  <FileScan className="text-muted-foreground mr-2 h-4 w-4" />{" "}
+                  {/* New action for scanning */}
+                  <span>Run Scan on Group</span> {/* Updated text */}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Trash2 className="text-muted-foreground" />
-                  <span>Delete Project</span>
+                  <Trash2 className="text-muted-foreground mr-2 h-4 w-4" />
+                  <span>Delete Group</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -79,8 +87,10 @@ export function NavProjects({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <PlusCircle className="text-sidebar-foreground/70 mr-2 h-4 w-4" />{" "}
+            {/* Added mr-2 and h-4 w-4 */}
+            <span className="text-xs">Create New Group</span>{" "}
+            {/* Updated text */}
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
