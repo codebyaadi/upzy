@@ -66,7 +66,7 @@ const data = {
     },
     {
       title: "Uptime Monitors",
-      url: "#/monitors",
+      url: "/dashboard/monitors",
       icon: Monitor,
       items: [],
     },
