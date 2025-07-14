@@ -25,7 +25,7 @@ export default function DashboardLayout({
             />
           </div>
         </header>
-        <main>{children}</main>
+        <main className="font-inter flex flex-1 flex-col px-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

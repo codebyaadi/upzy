@@ -12,6 +12,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.34.0",
     "@upzy/ui": "workspace:*",
     "@upzy/utils": "workspace:*",
     "lucide-react": "^0.475.0",
