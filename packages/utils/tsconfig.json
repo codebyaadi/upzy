@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@upzy/db/*": ["./src/*"]
+      "@upzy/utils/*": ["./src/*"]
     }
   },
   "include": ["."],
