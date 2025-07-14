@@ -1,0 +1,31 @@
+{
+  "name": "@upzy/validators",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@upzy/eslint-config": "workspace:*",
+    "@upzy/typescript-config": "workspace:*",
+    "tsup": "^8.5.0",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
+  },
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  }
+}
