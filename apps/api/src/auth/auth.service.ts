@@ -69,4 +69,37 @@ export class AuthService {
       return null;
     }
   }
+
+  async getSession(request: FastifyRequest) {
+    try {
+      // Convert Fastify headers to standard Headers object
+      const headers = new Headers();
+      Object.entries(request.headers).forEach(([key, value]) => {
+        if (value) headers.append(key, value.toString());
+      });
+
+      const session = await this.auth.api.getSession({
+        headers,
+      });
+
+      return session;
+    } catch (error) {
+      this.logger.error('Session validation error:', error);
+      return null;
+    }
+  }
+
+  async getCurrentUser(request: FastifyRequest) {
+    const session = await this.getSession(request);
+    return session?.user || null;
+  }
+
+  async isAuthenticated(request: FastifyRequest): Promise<boolean> {
+    const session = await this.getSession(request);
+    return session !== null;
+  }
+
+  getAuthInstance() {
+    return this.auth;
+  }
 }
