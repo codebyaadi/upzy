@@ -1,0 +1,10 @@
+{
+  "name": "worker",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "na-dev": "go run cmd/main.go",
+    "build": "go build -o bin/worker cmd/main.go",
+    "format": "gofmt -w ."
+  }
+}
