@@ -7,6 +7,7 @@ import { TestsModule } from './tests/tests.module';
 import { AuthModule } from './auth/auth.module';
 import { HealthModule } from './health/health.module';
 import { envSchema } from './config/env.schema';
+import { MonitorModule } from './monitor/monitor.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { envSchema } from './config/env.schema';
     TestsModule,
     AuthModule,
     HealthModule,
+    MonitorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
