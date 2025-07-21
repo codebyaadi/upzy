@@ -1,1 +1,5 @@
-export { monitorSchema, type CreateMonitorDto } from "./monitor";
+export {
+  monitorSchema,
+  monitorInputSchema,
+  type CreateMonitorDto,
+} from "./monitor";
