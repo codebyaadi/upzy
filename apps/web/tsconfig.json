@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@upzy/ui/*": ["../../packages/ui/src/*"]
+      "@upzy/ui/*": ["../../packages/ui/src/*"],
+      "@upzy/validators/*": ["../../packages/validators/src/*"]
     },
     "plugins": [
       {
