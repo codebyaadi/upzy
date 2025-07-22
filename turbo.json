@@ -20,6 +20,17 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "go:build": {
+      "inputs": ["**/*.go", "go.mod", "go.sum"],
+      "outputs": ["bin/**", "../../bin/**"]
+    },
+    "go:format": {
+      "inputs": ["**/*.go", "go.mod", "go.sum"]
+    },
+    "go:dev": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
