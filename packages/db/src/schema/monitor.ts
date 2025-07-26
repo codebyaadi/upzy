@@ -7,6 +7,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+import { v7 as uuidv7 } from "uuid";
 import { organizations, users } from "./auth";
 import {
   authTypeEnum,
@@ -15,7 +16,9 @@ import {
 } from "../enums/monitor";
 
 export const monitors = pgTable("monitors", {
-  id: text("id").primaryKey(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => uuidv7()),
   createdById: text("created_by_id")
     .notNull()
     .references(() => users.id, { onDelete: "set null" }),

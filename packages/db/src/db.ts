@@ -14,3 +14,5 @@ export function createDatabase(connectionString: string) {
 }
 
 export type Database = ReturnType<typeof createDatabase>;
+
+export const db = createDatabase(process.env.DATABASE_URL!);
