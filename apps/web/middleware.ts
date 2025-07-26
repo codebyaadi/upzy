@@ -27,5 +27,5 @@ export async function middleware(request: NextRequest) {
 export const config = {
   // Specify the routes the middleware applies to
   // This will run the middleware for /dashboard, /signin, and /signup
-  matcher: ["/dashboard", "/signin", "/signup"],
+  matcher: ["/dashboard/:path*", "/signin", "/signup"],
 };
