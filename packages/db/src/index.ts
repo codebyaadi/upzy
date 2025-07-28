@@ -1,7 +1,13 @@
 export * from "./db";
 export * from "./schema";
+export * as schema from "./schema";
 
 /**
- * Named exports for specific schema parts
+ * Drizzle specific exports
  */
-export * as authSchema from "./schema/auth";
+export { eq, ne, gt, gte, lt, lte } from "drizzle-orm";
+
+/**
+ * Drizzle types export
+ */
+export { NodePgDatabase } from "drizzle-orm/node-postgres";
