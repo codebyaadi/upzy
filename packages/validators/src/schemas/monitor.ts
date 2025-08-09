@@ -1,5 +1,9 @@
 import * as z from "zod";
-import { AuthTypeEnum, HttpMethodEnum, MonitorTypeEnum } from "./enums/monitor";
+import {
+  AuthTypeEnum,
+  HttpMethodEnum,
+  MonitorTypeEnum,
+} from "../enums/monitor";
 
 // Input schema for the form (with optional fields that have defaults)
 export const monitorInputSchema = z.object({
