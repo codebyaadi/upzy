@@ -1,17 +1,23 @@
-import { Module, Global } from '@nestjs/common';
+import { Module, Global, OnModuleDestroy } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { createDatabase } from '@upzy/db';
+import { closeAllDatabaseConnections, createDatabase } from '@upzy/db';
 import { DatabaseService } from './database.service';
 import { EnvType } from '../config/env.schema';
+import { DB_PROVIDER } from './database.provider';
 
 @Global()
 @Module({
   providers: [
     {
-      provide: 'DATABASE',
+      provide: DB_PROVIDER,
       useFactory: (configService: ConfigService<EnvType>) => {
-        // const { createDatabase } = require('@upzy/db');
-        return createDatabase(configService.get('DATABASE_URL') || '');
+        const databaseUrl = configService.get<string>('DATABASE_URL');
+        if (!databaseUrl) {
+          throw new Error(
+            'DATABASE_URL is not defined in NestJS configuration.',
+          );
+        }
+        return createDatabase(databaseUrl);
       },
       inject: [ConfigService],
     },
@@ -19,4 +25,9 @@ import { EnvType } from '../config/env.schema';
   ],
   exports: ['DATABASE', DatabaseService],
 })
-export class DatabaseModule {}
+export class DatabaseModule implements OnModuleDestroy {
+  // This lifecycle hook is crucial for graceful shutdown of long-running processes
+  async onModuleDestroy() {
+    await closeAllDatabaseConnections();
+  }
+}
