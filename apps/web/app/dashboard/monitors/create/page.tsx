@@ -2,21 +2,27 @@
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { LoaderCircle } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { Button } from "@upzy/ui/components/button";
 import { Form } from "@upzy/ui/components/form";
-import { monitorInputSchema, CreateMonitorDto } from "@upzy/validators/monitor";
+import { monitorInputSchema, CreateMonitorDto } from "@upzy/validators";
 
-import { BasicInformationForm } from "../_components/new-form/basic-information";
-import { MonitoringRegionsForm } from "../_components/new-form/monitoring-regions";
-import { HttpConfigurationForm } from "../_components/new-form/http-configuration";
-import { DNSConfigurationForm } from "../_components/new-form/dns-configuration";
-import { PlaywrightConfigurationForm } from "../_components/new-form/playwright-configuration";
-import { AuthenticationForm } from "../_components/new-form/authentication";
-import { AdvancedSettingsForm } from "../_components/new-form/advanced-settings";
-import { StatusControlsForm } from "../_components/new-form/status-controls";
+import { BasicInformationForm } from "../_components/monitor-form/basic-information";
+import { MonitoringRegionsForm } from "../_components/monitor-form/monitoring-regions";
+import { HttpConfigurationForm } from "../_components/monitor-form/http-configuration";
+import { DNSConfigurationForm } from "../_components/monitor-form/dns-configuration";
+import { PlaywrightConfigurationForm } from "../_components/monitor-form/playwright-configuration";
+import { AuthenticationForm } from "../_components/monitor-form/authentication";
+import { AdvancedSettingsForm } from "../_components/monitor-form/advanced-settings";
+import { StatusControlsForm } from "../_components/monitor-form/status-controls";
+import { useRouter } from "next/navigation";
+import { http } from "@/lib/http";
+import { HttpError } from "@upzy/lib";
 
-export default function NewMonitor() {
+export default function CreateMonitorPage() {
+  const router = useRouter();
   const [currentTag, setCurrentTag] = useState("");
 
   const form = useForm<CreateMonitorDto>({
@@ -56,8 +62,31 @@ export default function NewMonitor() {
   const watchedType = form.watch("type");
   const watchedAuthType = form.watch("authType");
 
-  const onSubmit: SubmitHandler<CreateMonitorDto> = (data) => {
-    console.log("Monitor data:", data);
+  const onSubmit: SubmitHandler<CreateMonitorDto> = async (data) => {
+    try {
+      const result = await http.post<{ success: boolean; message: string }>(
+        "/monitor",
+        data
+      );
+
+      console.log("API Success:", result.message);
+      toast.success(result.message || "Monitor created successfully!");
+
+      router.push("/dashboard/monitors");
+    } catch (error) {
+      console.error("Submission failed:", error);
+
+      if (error instanceof HttpError) {
+        // The `error.body` contains the JSON response from the server.
+        // This could be a generic message or specific validation errors.
+        const serverMessage =
+          error.body?.message || "An error occurred on the server.";
+
+        toast.error(serverMessage);
+      } else {
+        toast.error("An unexpected network error occurred. Please try again.");
+      }
+    }
   };
 
   const addTag = () => {
@@ -150,10 +179,18 @@ export default function NewMonitor() {
               type="button"
               variant="outline"
               onClick={() => form.reset()}
+              disabled={form.formState.isSubmitting}
             >
               Cancel
             </Button>
-            <Button type="submit">Create Monitor</Button>
+            <Button type="submit">
+              {" "}
+              {form.formState.isSubmitting ? (
+                <LoaderCircle className="animate-spin" />
+              ) : (
+                "Create"
+              )}
+            </Button>
           </div>
         </form>
       </Form>

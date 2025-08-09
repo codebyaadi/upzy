@@ -60,7 +60,7 @@ export default function Onboard() {
         name: `${values.firstname} ${values.lastname}`,
       });
 
-      const slug = generateSlug(values.organization);
+      const slug = await generateSlug(values.organization);
 
       const { data, error } = await authClient.organization.create({
         name: values.organization,

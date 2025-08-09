@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@upzy/ui/components/form";
 import { Textarea } from "@upzy/ui/components/textarea";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface PlaywrightConfigurationFormProps {
   form: UseFormReturn<CreateMonitorDto>;

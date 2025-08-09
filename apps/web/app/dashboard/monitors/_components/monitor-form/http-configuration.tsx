@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@upzy/ui/components/select";
 import { Textarea } from "@upzy/ui/components/textarea";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface HttpConfigurationFormProps {
   form: UseFormReturn<CreateMonitorDto>;

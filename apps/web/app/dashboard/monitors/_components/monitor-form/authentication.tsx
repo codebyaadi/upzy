@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@upzy/ui/components/select";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface AuthenticationFormProps {
   form: UseFormReturn<CreateMonitorDto>;

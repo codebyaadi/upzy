@@ -65,7 +65,7 @@ export default function Monitors() {
               </div>
             </div>
             <Button
-              onClick={() => router.push("/dashboard/monitors/new")}
+              onClick={() => router.push("/dashboard/monitors/create")}
               size="sm"
               className="cursor-pointer text-xs"
             >

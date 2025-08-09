@@ -9,7 +9,7 @@ import {
 import { FormControl, FormField, FormItem } from "@upzy/ui/components/form";
 import { Label } from "@upzy/ui/components/label";
 import { Switch } from "@upzy/ui/components/switch";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface StatusControlsFormProps {
   form: UseFormReturn<CreateMonitorDto>;

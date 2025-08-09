@@ -10,7 +10,7 @@ import {
 import { Checkbox } from "@upzy/ui/components/checkbox";
 import { FormField, FormItem, FormMessage } from "@upzy/ui/components/form";
 import { Label } from "@upzy/ui/components/label";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface MonitoringRegionsFormProps {
   form: UseFormReturn<CreateMonitorDto>;

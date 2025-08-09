@@ -19,7 +19,7 @@ import {
 } from "@upzy/ui/components/form";
 import { Input } from "@upzy/ui/components/input";
 import { Switch } from "@upzy/ui/components/switch";
-import { CreateMonitorDto } from "@upzy/validators/monitor";
+import { CreateMonitorDto } from "@upzy/validators/schemas/monitor";
 
 interface AdvancedSettingsFormProps {
   form: UseFormReturn<CreateMonitorDto>;
