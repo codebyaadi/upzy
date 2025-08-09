@@ -28,6 +28,7 @@
     "@upzy/auth": "workspace:*",
     "@upzy/db": "workspace:*",
     "@upzy/email": "workspace:*",
+    "@upzy/validators": "workspace:*",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "zod": "^3.25.67"

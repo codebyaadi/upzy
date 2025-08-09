@@ -8,10 +8,16 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { monitorInputSchema, CreateMonitorDto } from '@upzy/validators';
+import { Session, User } from '@upzy/auth';
 import { MonitorService } from './monitor.service';
-import { CreateMonitorDto } from './dto/create-monitor.dto';
 import { UpdateMonitorDto } from './dto/update-monitor.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import { ZodValidationPipe } from '../common/pipes/zod.pipe';
+import {
+  CurrentSession,
+  CurrentUser,
+} from 'src/common/decorators/user.decorator';
 
 @Controller('monitor')
 @UseGuards(AuthGuard)
@@ -19,8 +25,17 @@ export class MonitorController {
   constructor(private readonly monitorService: MonitorService) {}
 
   @Post()
-  create(@Body() createMonitorDto: CreateMonitorDto) {
-    return this.monitorService.create(createMonitorDto, '');
+  create(
+    @Body(new ZodValidationPipe(monitorInputSchema))
+    createMonitorDto: CreateMonitorDto,
+    @CurrentUser() user: User,
+    @CurrentSession() session: Session,
+  ) {
+    return this.monitorService.create(
+      createMonitorDto,
+      user.id,
+      session.activeOrganizationId,
+    );
   }
 
   @Get()
