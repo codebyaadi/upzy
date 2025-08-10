@@ -6,15 +6,17 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { EnvType } from './config/env.schema';
+import { logger } from './common/middleware/logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true, trustProxy: true }),
+    new FastifyAdapter({ trustProxy: true }),
   );
 
   const configService = app.get(ConfigService<EnvType>);
 
+  app.use(logger);
   app.enableCors({
     origin: [configService.get('NEXT_PUBLIC_BASE_URL')].filter(
       Boolean,
