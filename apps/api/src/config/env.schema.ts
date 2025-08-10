@@ -17,6 +17,9 @@ export const envSchema = z.object({
   // Database
   DATABASE_URL: z.string().url(),
 
+  // Redis
+  REDIS_URL: z.string().url(),
+
   // Email
   EMAIL_HOST: z.string(),
   EMAIL_PORT: z.string().transform((val) => parseInt(val, 10)),
