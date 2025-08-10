@@ -31,10 +31,6 @@
       "types": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./next-db": {
-      "types": "./src/db.ts",
-      "default": "./dist/db.js"
-    },
     "./schema/*": {
       "types": "./src/schema/*.ts",
       "default": "./dist/schema/*.js"
