@@ -1,5 +1,6 @@
 // Export database clients (e.g., db, redis)
 export * from "./drizzle";
+export * from "./redis";
 
 // Export all schemas and also a named 'schema' object for convenience
 export * from "./schema";

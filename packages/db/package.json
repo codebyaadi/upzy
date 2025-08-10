@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.44.3",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "redis": "^5.8.0"
   },
   "main": "./dist/index.js",
   "types": "./src/index.ts",

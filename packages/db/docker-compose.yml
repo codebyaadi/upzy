@@ -1,35 +1,51 @@
+version: '3.8'
+
 services:
-  postgres:
-    image: postgres:13-alpine
-    container_name: postgres_db
+  # Provides a PostgreSQL database with time-series capabilities.
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: timescaledb
     ports:
       - "5432:5432"
     environment:
-      # Set your desired database name, user, and password here
-      POSTGRES_DB: upzy_database
-      POSTGRES_USER: upzy
-      POSTGRES_PASSWORD: upzypass
+      - POSTGRES_DB=upzy_database
+      - POSTGRES_USER=upzy
+      - POSTGRES_PASSWORD=upzypass
     volumes:
-      # Persist PostgreSQL data to a named volume
-      - postgres_data:/var/lib/postgresql/data
+      - timescaledb_data:/var/lib/postgresql/data
 
+  # Web UI for managing the PostgreSQL database. Access at http://localhost:5050
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_web
     ports:
       - "5050:80"
     environment:
-      # Set your desired pgAdmin login email and password here
-      PGADMIN_DEFAULT_EMAIL: admin@upzy.com
-      PGADMIN_DEFAULT_PASSWORD: admin_password
+      - PGADMIN_DEFAULT_EMAIL=admin@upzy.com
+      - PGADMIN_DEFAULT_PASSWORD=admin_password
     volumes:
-      # Persist pgAdmin configuration to a named volume
       - pgadmin_data:/var/lib/pgadmin
     depends_on:
-      # Ensure PostgreSQL starts before pgAdmin
-      - postgres
+      - timescaledb
 
+  # All-in-one Redis: includes Caching, Streams, Vector Search, and a Web UI.
+  # Access the UI at http://localhost:8001
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6379:6379" # Redis server port
+      - "8001:8001" # RedisInsight UI port
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+# Named volumes ensure data persists if containers are recreated.
 volumes:
-  # Define named volumes for data persistence
-  postgres_data:
+  timescaledb_data:
   pgadmin_data:
+  redis_data:
