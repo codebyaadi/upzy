@@ -8,7 +8,6 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json}\"",
     "check-types": "turbo run check-types",
-    "docker:up": "turbo run docker:up",
     "go:dev": "turbo run go:dev",
     "go:build": "turbo run go:build",
     "go:format": "turbo run go:format"

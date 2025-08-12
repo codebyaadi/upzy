@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsup",
-    "dev": "email dev --dir ./src/templates --port 3001",
-    "docker:up": "docker compose up -d || docker-compose up -d"
+    "dev": "email dev --dir ./src/templates --port 3001"
   },
   "devDependencies": {
     "@types/bun": "latest",
