@@ -7,9 +7,11 @@
     "db:generate": "bunx drizzle-kit generate",
     "db:migrate": "bunx drizzle-kit migrate",
     "db:push": "bunx drizzle-kit push",
+    "db:seed": "bun run src/seed.ts",
     "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
     "@types/bun": "latest",
     "@types/pg": "^8.15.2",
     "@upzy/eslint-config": "workspace:*",
