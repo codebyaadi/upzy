@@ -1,0 +1,23 @@
+# Git and version control
+.git
+.gitignore
+
+# Node.js
+node_modules
+.npmrc
+npm-debug.log
+
+# Environment files
+.env
+.env.*
+!/.env.example
+
+# Build artifacts
+out/
+dist/
+build/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.DS_Store
