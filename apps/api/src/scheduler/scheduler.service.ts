@@ -12,6 +12,7 @@ import {
   RedisClientType,
 } from '@upzy/db';
 import { sql } from '@upzy/db';
+import { generateUUIDv7 } from '@upzy/utils';
 import { DB_PROVIDER, REDIS_PROVIDER } from 'src/database/database.provider';
 
 @Injectable()
@@ -60,13 +61,24 @@ export class SchedulerService {
       let jobsPublished = 0;
 
       for (const monitor of dueMonitors) {
+        const traceId = generateUUIDv7();
+
+        this.logger.log(
+          `Scheduling run for monitor ${monitor.id} with traceId: ${traceId}`,
+        );
+
         const targetRegions =
           monitor.regions && monitor.regions.length > 0
             ? monitor.regions
             : ['global'];
 
         for (const region of targetRegions) {
-          const jobPayload = JSON.stringify(monitor);
+          const job = {
+            ...monitor,
+            traceId: traceId,
+          };
+
+          const jobPayload = JSON.stringify(job);
           const streamName = `jobs:checks:${region}`;
 
           multi.xAdd(streamName, '*', { payload: jobPayload });
