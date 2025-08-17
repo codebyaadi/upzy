@@ -1,0 +1,8 @@
+{
+  "name": "@upzy/go-datastore",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "go:format": "gofmt -w ."
+  }
+}
