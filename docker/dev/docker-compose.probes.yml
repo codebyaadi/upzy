@@ -1,0 +1,53 @@
+name: "upzy-probes"
+
+# Define a reusable template using a 'x-' extension field.
+# The '&probe-template' is a YAML anchor, giving it a name.
+x-probe-template: &probe-template
+  restart: unless-stopped
+  build:
+    context: ../..
+    dockerfile: ./services/probe/Dockerfile
+  environment:
+    # Connect to Redis using its service name on the shared network.
+    # This is more secure and reliable than using host.docker.internal.
+    - REDIS_URL=redis://redis-stack:6379
+  # Attach all services using this template to the pre-existing upzy_net network.
+  networks:
+    - upzy_net
+
+services:
+  probe-us-east-1:
+    <<: *probe-template # '<<:' merges the template here
+    environment:
+      - PROBE_REGION=us-east-1
+      - REDIS_URL=redis://redis-stack:6379
+
+  probe-us-west-2:
+    <<: *probe-template # Merge template
+    environment:
+      - PROBE_REGION=us-west-2
+      - REDIS_URL=redis://redis-stack:6379
+
+  probe-eu-west-1:
+    <<: *probe-template # Merge template
+    environment:
+      - PROBE_REGION=eu-west-1
+      - REDIS_URL=redis://redis-stack:6379
+
+  probe-ap-southeast-1:
+    <<: *probe-template # Merge template
+    environment:
+      - PROBE_REGION=ap-southeast-1
+      - REDIS_URL=redis://redis-stack:6379
+
+  probe-ap-northeast-1:
+    <<: *probe-template # Merge template
+    environment:
+      - PROBE_REGION=ap-northeast-1
+      - REDIS_URL=redis://redis-stack:6379
+
+# This section tells Docker Compose that 'upzy_net' is an existing network
+# created by the other compose file and should not be created again.
+networks:
+  upzy_net:
+    external: true
