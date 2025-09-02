@@ -30,4 +30,5 @@ type CheckResult struct {
 	StatusCode     int       `json:"statusCode,omitempty"`
 	LatencyTotalMs int64     `json:"latencyTotalMs"`
 	ErrorMessage   string    `json:"errorMessage,omitempty"`
+	Timings        json.RawMessage `json:"timings,omitempty"`
 }
