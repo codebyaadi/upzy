@@ -5,6 +5,7 @@ use (
 	./libs/logger
 	./libs/models
 	./libs/utils
+	./services/ingestor
 	./services/probe
 	./services/scheduler
 )
