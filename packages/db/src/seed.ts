@@ -1,5 +1,3 @@
-// scripts/seed.ts
-
 import "dotenv/config";
 import { faker } from "@faker-js/faker";
 import { v7 as uuidv7 } from "uuid";
@@ -16,6 +14,7 @@ const main = async () => {
   await db.delete(schema.members);
   await db.delete(schema.users);
   await db.delete(schema.organizations);
+  await db.delete(schema.teams); // Clear teams table
   console.log("✅ Existing data deleted.");
 
   // 2. Seed Organizations
@@ -50,40 +49,51 @@ const main = async () => {
     .returning();
   console.log("✅ Users seeded.");
 
-  // 4. Seed Members (Link Users to Organizations)
+  // 4. Seed Teams
+  console.log("👥 Seeding teams...");
+  const teamsData = orgs.flatMap((org) => {
+    const teamCount = faker.number.int({ min: 2, max: 5 });
+    return Array.from({ length: teamCount }, () => ({
+      id: uuidv7(),
+      name: faker.commerce.department(),
+      organizationId: org.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }));
+  });
+  const teams = await db.insert(schema.teams).values(teamsData).returning();
+  console.log("✅ Teams seeded.");
+
+  // 5. Seed Members (Link Users to Organizations and Teams)
   console.log(`🤝 Seeding ${USER_COUNT} members...`);
   const membersData = seededUsers.map((user) => {
     const randomOrg = orgs[Math.floor(Math.random() * orgs.length)];
-    if (!randomOrg) {
-      throw new Error("No organization found when creating member");
-    }
-
+    const randomTeam =
+      teams[Math.floor(Math.random() * teams.length)]?.id || null;
     return {
       id: uuidv7(),
-      organizationId: randomOrg.id,
+      organizationId: randomOrg?.id || "",
       userId: user.id,
       role: Math.random() > 0.8 ? "admin" : "member",
+      teamId: randomTeam,
       createdAt: new Date(),
     };
   });
   await db.insert(schema.members).values(membersData);
   console.log("✅ Members seeded.");
 
-  // 5. Seed Monitors (500 for each organization with valid URLs)
+  // 6. Seed Monitors (500 for each organization with valid URLs)
   const MONITORS_PER_ORG = 500;
   const TOTAL_MONITORS = ORG_COUNT * MONITORS_PER_ORG;
   console.log(
     `📡 Seeding ${TOTAL_MONITORS} monitors using a list of 50 valid URLs...`,
   );
 
-  // *** NEW: List of 50 valid URLs ***
   const VALID_URLS = [
-    // Your provided URLs
     "https://refine-dashboard-ant.netlify.app/",
     "https://portfolio-react-framer-m.netlify.app/",
     "https://movieboot.netlify.app/",
     "https://finance-tracker-fastapi-react.netlify.app/",
-    // 46 additional valid URLs
     "https://google.com",
     "https://github.com",
     "https://microsoft.com",
@@ -143,13 +153,11 @@ const main = async () => {
   // Loop through each organization to create its monitors
   for (const org of orgs) {
     const monitorsData = Array.from({ length: MONITORS_PER_ORG }, () => {
-      // *** MODIFIED: Pick a random URL from the valid list ***
       const randomUrl = faker.helpers.arrayElement(VALID_URLS);
       const monitorName = `Check ${new URL(randomUrl).hostname}`;
 
       return {
         name: monitorName,
-        // After
         slug:
           faker.helpers.slugify(monitorName).toLowerCase() +
           `-${faker.string.alphanumeric(8)}`,
@@ -161,7 +169,7 @@ const main = async () => {
           { min: 1, max: 3 },
         ),
         createdById: randomUser().id,
-        organizationId: org.id, // Assign to the current organization in the loop
+        organizationId: org.id,
       };
     });
 
