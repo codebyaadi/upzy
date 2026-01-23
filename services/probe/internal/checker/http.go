@@ -14,8 +14,9 @@ import (
 	fhttp "github.com/bogdanfinn/fhttp"
 	tls_client "github.com/bogdanfinn/tls-client"
 	"github.com/bogdanfinn/tls-client/profiles"
-	"github.com/codebyaadi/upzy/libs/models"
+	"github.com/codebyaadi/upzy/libs/db"
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 func isRetryableError(err error) bool {
@@ -34,22 +35,22 @@ func isRetryableError(err error) bool {
 	return false
 }
 
-func ExecuteHTTPCheck(job models.MonitorJob, region string) models.CheckResult {
+func ExecuteHTTPCheck(job db.GetMonitorJobRow, region string) db.Check {
 	startTime := time.Now()
 	requestID := uuid.New().String()
 
-	result := models.CheckResult{
-		Timestamp:   startTime.UTC(),
-		MonitorID:   job.ID,
-		RequestID:   requestID,
-		TraceID:     job.TraceID,
-		ProbeRegion: region,
-		IsSuccess:   false,
+	result := db.Check{
+		Timestamp:      pgtype.Timestamptz{Time: startTime.UTC(), Valid: true},
+		MonitorID:      job.ID,
+		RequestID:      requestID,
+		TraceID:        job.TraceID,
+		ProbeRegion:    region,
+		IsSuccess:      false,
 	}
 
 	jar := tls_client.NewCookieJar()
 	options := []tls_client.HttpClientOption{
-		tls_client.WithTimeoutSeconds(job.RequestTimeout),
+		tls_client.WithTimeoutSeconds(int(job.RequestTimeout)),
 		tls_client.WithClientProfile(profiles.Chrome_120),
 		tls_client.WithCookieJar(jar),
 	}
@@ -59,7 +60,7 @@ func ExecuteHTTPCheck(job models.MonitorJob, region string) models.CheckResult {
 
 	client, err := tls_client.NewHttpClient(tls_client.NewNoopLogger(), options...)
 	if err != nil {
-		result.ErrorMessage = fmt.Sprintf("Failed to create TLS client: %v", err)
+		result.ErrorMessage = pgtype.Text{String: fmt.Sprintf("Failed to create TLS client: %v", err), Valid: true}
 		return result
 	}
 
@@ -72,9 +73,27 @@ func ExecuteHTTPCheck(job models.MonitorJob, region string) models.CheckResult {
 	var lastErr error
 
 	for attempt := 1; attempt <= maxRetries; attempt++ {
-		req, err := fhttp.NewRequest(job.HTTPMethod, job.URL, strings.NewReader(job.RequestBody))
+		// Use HTTPMethod directly because it's a string type in generated struct if we mapped it, 
+		// but in DB it's NullHttpMethod. Wait, job_queue.sql says:
+		// http_method,
+		// And generated struct has: HttpMethod NullHttpMethod. 
+		// We need to access .HttpMethod and maybe string() it?
+		// Actually NullHttpMethod is struct { HttpMethod HttpMethod; Valid bool }.
+		// And HttpMethod is string-like enum.
+		
+		method := "GET"
+		if job.HttpMethod.Valid {
+			method = string(job.HttpMethod.HttpMethod)
+		}
+		
+		body := ""
+		if job.RequestBody.Valid {
+			body = job.RequestBody.String
+		}
+
+		req, err := fhttp.NewRequest(method, job.Url, strings.NewReader(body))
 		if err != nil {
-			result.ErrorMessage = fmt.Sprintf("Failed to create request: %v", err)
+			result.ErrorMessage = pgtype.Text{String: fmt.Sprintf("Failed to create request: %v", err), Valid: true}
 			return result
 		}
 
@@ -89,7 +108,7 @@ func ExecuteHTTPCheck(job models.MonitorJob, region string) models.CheckResult {
 			"X-Upzy-Request-ID":  {requestID},
 		}
 
-		if len(job.RequestHeaders) > 0 && string(job.RequestHeaders) != "null" {
+		if len(job.RequestHeaders) > 0 {
 			var customHeaders map[string]string
 			if err := json.Unmarshal(job.RequestHeaders, &customHeaders); err == nil {
 				for key, value := range customHeaders {
@@ -112,25 +131,25 @@ func ExecuteHTTPCheck(job models.MonitorJob, region string) models.CheckResult {
 		resp.Body.Close()
 
 		lastErr = nil
-		result.StatusCode = resp.StatusCode
-		if slices.Contains(job.ExpectedStatusCodes, resp.StatusCode) {
+		result.StatusCode = pgtype.Int4{Int32: int32(resp.StatusCode), Valid: true}
+		if slices.Contains(job.ExpectedStatusCodes, int32(resp.StatusCode)) {
 			result.IsSuccess = true
 		} else {
-			result.ErrorMessage = fmt.Sprintf("Unexpected status code: %d", resp.StatusCode)
+			result.ErrorMessage = pgtype.Text{String: fmt.Sprintf("Unexpected status code: %d", resp.StatusCode), Valid: true}
 		}
 		break
 	}
 
 	if lastErr != nil {
-		result.ErrorMessage = fmt.Sprintf("Request failed after %d attempts: %v", maxRetries, lastErr)
+		result.ErrorMessage = pgtype.Text{String: fmt.Sprintf("Request failed after %d attempts: %v", maxRetries, lastErr), Valid: true}
 	}
 
 	latencyMs := time.Since(startTime).Milliseconds()
-	if result.IsSuccess && job.ExpectedResponseTime > 0 && latencyMs > int64(job.ExpectedResponseTime) {
+	if result.IsSuccess && job.ExpectedResponseTime.Valid && latencyMs > int64(job.ExpectedResponseTime.Int32) {
 		result.IsSuccess = false
-		result.ErrorMessage = fmt.Sprintf("Response time (%dms) exceeded threshold (%dms)", latencyMs, job.ExpectedResponseTime)
+		result.ErrorMessage = pgtype.Text{String: fmt.Sprintf("Response time (%dms) exceeded threshold (%dms)", latencyMs, job.ExpectedResponseTime.Int32), Valid: true}
 	}
 
-	result.LatencyTotalMs = latencyMs
+	result.LatencyTotalMs = int32(latencyMs)
 	return result
 }

@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/codebyaadi/upzy/libs/logger"
-	"github.com/codebyaadi/upzy/libs/models"
+	"github.com/codebyaadi/upzy/libs/db"
 	"github.com/codebyaadi/upzy/services/probe/internal/checker"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
@@ -70,7 +70,7 @@ func (p *Pool) worker(id int) {
 	groupName := fmt.Sprintf("probes-%s", p.cfg.Region)
 
 	for msg := range p.jobsChan {
-		var job models.MonitorJob
+		var job db.GetMonitorJobRow
 		payload, ok := msg.Values["payload"].(string)
 		if !ok {
 			log.Error("Job failed: Invalid payload format (not a string)", "messageId", msg.ID)
@@ -84,15 +84,15 @@ func (p *Pool) worker(id int) {
 			continue
 		}
 
-		log.Info("Processing job started", "monitorId", job.ID, "traceId", job.TraceID, "url", job.URL)
+		log.Info("Processing job started", "monitorId", job.ID, "traceId", job.TraceID, "url", job.Url)
 
-		var result models.CheckResult
+		var result db.Check
 		switch job.Type {
 		case "http", "https":
 			result = checker.ExecuteHTTPCheck(job, p.cfg.Region)
 		default:
 			log.Warn("Unsupported monitor type", "type", job.Type, "monitorId", job.ID)
-			result = models.CheckResult{ /* ... error fields ... */ }
+			result = db.Check{ /* ... error fields ... */ }
 		}
 
 		p.publishResult(result)
@@ -156,7 +156,7 @@ func (p *Pool) consume() {
 	}
 }
 
-func (p *Pool) publishResult(result models.CheckResult) {
+func (p *Pool) publishResult(result db.Check) {
 	payload, err := json.Marshal(result)
 	if err != nil {
 		p.log.Error("Could not marshal result", "error", err, "monitorId", result.MonitorID)

@@ -1,12 +1,12 @@
 # --- Build Stage ---
-FROM golang:1.24-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 # Set a general working directory
 WORKDIR /app
 
 # 1. Copy the module files, maintaining their monorepo paths.
 COPY services/probe/go.mod services/probe/go.sum ./services/probe/
-COPY libs/models/go.mod ./libs/models/
+COPY libs/db/go.mod ./libs/db/
 COPY libs/logger/go.mod libs/logger/go.sum ./libs/logger/
 COPY libs/datastore/go.mod libs/datastore/go.sum ./libs/datastore/
 
