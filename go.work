@@ -1,9 +1,9 @@
-go 1.24.5
+go 1.25.5
 
 use (
 	./libs/datastore
 	./libs/logger
-	./libs/models
+	./libs/db
 	./libs/utils
 	./services/ingestor
 	./services/probe

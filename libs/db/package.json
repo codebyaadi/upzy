@@ -1,5 +1,5 @@
 {
-  "name": "@upzy/go-models",
+  "name": "@upzy/go-db",
   "version": "0.0.0",
   "private": true,
   "scripts": {
