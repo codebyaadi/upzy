@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/codebyaadi/upzy/libs/models"
+	"github.com/codebyaadi/upzy/libs/db"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -17,7 +17,7 @@ func New(pool *pgxpool.Pool) *Store {
 }
 
 // BulkInsertChecks inserts multiple check results using the high-performance COPY protocol.
-func (s *Store) BulkInsertChecks(ctx context.Context, results []models.CheckResult) error {
+func (s *Store) BulkInsertChecks(ctx context.Context, results []db.Check) error {
 	// Define the columns in the order we will provide them.
 	// This must match the order of fields in the CopyFromSource.
 	columns := []string{
@@ -44,7 +44,7 @@ func (s *Store) BulkInsertChecks(ctx context.Context, results []models.CheckResu
 // checkResultSource is a helper struct to adapt our []CheckResult slice
 // to the pgx.CopyFromSource interface.
 type checkResultSource struct {
-	results []models.CheckResult
+	results []db.Check
 	idx     int
 }
 

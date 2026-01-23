@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/codebyaadi/upzy/libs/logger"
-	"github.com/codebyaadi/upzy/libs/models"
+	"github.com/codebyaadi/upzy/libs/db"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/batcher"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -113,7 +113,7 @@ func (p *Pool) worker(ctx context.Context, id int) {
 }
 
 func (p *Pool) processMessage(ctx context.Context, msg redis.XMessage) {
-	var result models.CheckResult
+	var result db.Check
 	payload, ok := msg.Values["payload"].(string)
 	if !ok {
 		p.log.Error("Invalid payload format", "messageId", msg.ID)
@@ -127,6 +127,9 @@ func (p *Pool) processMessage(ctx context.Context, msg redis.XMessage) {
 		return
 	}
 
+	// Previously: Converted DTO to DB Model
+	// Now: Redis payload IS the DB Model (db.Check) serialized as JSON (snake_case)
+	
 	// Send the valid result to the batcher
 	p.batcher.Add(result)
 	p.ackMessage(ctx, msg.ID)

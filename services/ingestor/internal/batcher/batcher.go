@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/codebyaadi/upzy/libs/logger"
-	"github.com/codebyaadi/upzy/libs/models"
+	"github.com/codebyaadi/upzy/libs/db"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/store"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -14,10 +14,10 @@ import (
 type Batcher struct {
 	store        *store.Store
 	log          *logger.Logger
-	batch        []models.CheckResult
+	batch        []db.Check
 	maxSize      int
 	maxTimeout   time.Duration
-	inputChan    chan models.CheckResult
+	inputChan    chan db.Check
 	shutdownChan chan struct{}
 	mutex        sync.Mutex
 }
@@ -26,15 +26,15 @@ func NewBatcher(pool *pgxpool.Pool, log *logger.Logger, maxSize int, maxTimeout 
 	return &Batcher{
 		store:        store.New(pool),
 		log:          log,
-		batch:        make([]models.CheckResult, 0, maxSize),
+		batch:        make([]db.Check, 0, maxSize),
 		maxSize:      maxSize,
 		maxTimeout:   maxTimeout,
-		inputChan:    make(chan models.CheckResult, maxSize*2),
+		inputChan:    make(chan db.Check, maxSize*2),
 		shutdownChan: make(chan struct{}),
 	}
 }
 
-func (b *Batcher) Add(result models.CheckResult) {
+func (b *Batcher) Add(result db.Check) {
 	b.inputChan <- result
 }
 
@@ -82,7 +82,7 @@ func (b *Batcher) flush(ctx context.Context) {
 	}
 
 	// Create a copy of the batch to be processed
-	batchToProcess := make([]models.CheckResult, len(b.batch))
+	batchToProcess := make([]db.Check, len(b.batch))
 	copy(batchToProcess, b.batch)
 	b.batch = b.batch[:0] // Clear the original batch
 	b.mutex.Unlock()
