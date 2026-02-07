@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/codebyaadi/upzy/libs/datastore/postgres"
-	"github.com/codebyaadi/upzy/libs/datastore/redis"
-	"github.com/codebyaadi/upzy/libs/logger"
+	"github.com/codebyaadi/upzy/pkg/datastore/postgres"
+	"github.com/codebyaadi/upzy/pkg/datastore/redis"
+	"github.com/codebyaadi/upzy/pkg/logger"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/config"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/worker"
 )

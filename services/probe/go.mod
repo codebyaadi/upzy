@@ -5,9 +5,9 @@ go 1.25.5
 require (
 	github.com/bogdanfinn/fhttp v0.6.0
 	github.com/bogdanfinn/tls-client v1.11.0
-	github.com/codebyaadi/upzy/libs/datastore v0.0.0-00010101000000-000000000000
-	github.com/codebyaadi/upzy/libs/db v0.0.0-00010101000000-000000000000
-	github.com/codebyaadi/upzy/libs/logger v0.0.0-20250810175205-1b6bb75f93f6
+	github.com/codebyaadi/upzy/pkg/datastore v0.0.0-00010101000000-000000000000
+	github.com/codebyaadi/upzy/pkg/db v0.0.0-00010101000000-000000000000
+	github.com/codebyaadi/upzy/pkg/logger v0.0.0-20250810175205-1b6bb75f93f6
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.8.0
 	github.com/redis/go-redis/v9 v9.12.1
@@ -51,8 +51,8 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/codebyaadi/upzy/libs/logger => ../../libs/logger
+replace github.com/codebyaadi/upzy/pkg/logger => ../../pkg/logger
 
-replace github.com/codebyaadi/upzy/libs/db => ../../libs/db
+replace github.com/codebyaadi/upzy/pkg/db => ../../pkg/db
 
-replace github.com/codebyaadi/upzy/libs/datastore => ../../libs/datastore
+replace github.com/codebyaadi/upzy/pkg/datastore => ../../pkg/datastore

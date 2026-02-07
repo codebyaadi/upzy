@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/codebyaadi/upzy/libs/db"
-	"github.com/codebyaadi/upzy/libs/logger"
+	"github.com/codebyaadi/upzy/pkg/db"
+	"github.com/codebyaadi/upzy/pkg/logger"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/batcher"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"

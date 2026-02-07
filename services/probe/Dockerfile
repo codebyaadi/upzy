@@ -6,9 +6,9 @@ WORKDIR /app
 
 # 1. Copy the module files, maintaining their monorepo paths.
 COPY services/probe/go.mod services/probe/go.sum ./services/probe/
-COPY libs/db/go.mod ./libs/db/
-COPY libs/logger/go.mod libs/logger/go.sum ./libs/logger/
-COPY libs/datastore/go.mod libs/datastore/go.sum ./libs/datastore/
+COPY pkg/db/go.mod ./pkg/db/
+COPY pkg/logger/go.mod pkg/logger/go.sum ./pkg/logger/
+COPY pkg/datastore/go.mod pkg/datastore/go.sum ./pkg/datastore/
 
 # 2. Change the working directory to the service we are building.
 # This is the key step.

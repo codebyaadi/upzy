@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/pkg/db"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

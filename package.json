@@ -27,6 +27,6 @@
     "apps/*",
     "packages/*",
     "services/*",
-    "libs/*"
+    "pkg/*"
   ]
 }

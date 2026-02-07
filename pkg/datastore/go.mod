@@ -1,4 +1,4 @@
-module github.com/codebyaadi/upzy/libs/datastore
+module github.com/codebyaadi/upzy/pkg/datastore
 
 go 1.24.5
 

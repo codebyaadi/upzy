@@ -14,7 +14,7 @@ import (
 	fhttp "github.com/bogdanfinn/fhttp"
 	tls_client "github.com/bogdanfinn/tls-client"
 	"github.com/bogdanfinn/tls-client/profiles"
-	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/pkg/db"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
 )

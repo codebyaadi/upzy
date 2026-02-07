@@ -3,7 +3,7 @@ package domain
 import (
 	"context"
 
-	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/pkg/db"
 )
 
 type Checker interface {

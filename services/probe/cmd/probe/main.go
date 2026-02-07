@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/codebyaadi/upzy/libs/datastore/redis"
-	"github.com/codebyaadi/upzy/libs/logger"
+	"github.com/codebyaadi/upzy/pkg/datastore/redis"
+	"github.com/codebyaadi/upzy/pkg/logger"
 	"github.com/codebyaadi/upzy/services/probe/internal/config"
 	"github.com/codebyaadi/upzy/services/probe/internal/worker"
 )

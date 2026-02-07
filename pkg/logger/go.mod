@@ -1,4 +1,4 @@
-module github.com/codebyaadi/upzy/libs/logger
+module github.com/codebyaadi/upzy/pkg/logger
 
 go 1.24.4
 

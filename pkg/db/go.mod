@@ -1,4 +1,4 @@
-module github.com/codebyaadi/upzy/libs/db
+module github.com/codebyaadi/upzy/pkg/db
 
 go 1.25.5
 
