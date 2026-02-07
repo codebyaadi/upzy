@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  generate:
+    desc: "Generate Go types from SQL"
+    dir: .
+    cmds:
+      - sqlc generate
+    sources:
+      - postgres/queries/*.sql
+      - ../../packages/db/drizzle/*.sql
+      - sqlc.yaml
+    generates:
+      - postgres/db.go
+      - postgres/models.go
+      - "postgres/*.sql.go"

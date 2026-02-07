@@ -1,11 +1,11 @@
 version: "2"
 sql:
-  - schema: "packages/db/drizzle"
-    queries: "pkg/db/queries"
+  - schema: "../../packages/db/drizzle"
+    queries: "postgres/queries"
     engine: "postgresql"
     gen:
       go:
-        out: "pkg/db"
+        out: "postgres"
         package: "db"
         sql_package: "pgx/v5"
         emit_json_tags: true
