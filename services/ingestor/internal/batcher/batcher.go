@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/store"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

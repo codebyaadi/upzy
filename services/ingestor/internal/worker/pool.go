@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/services/ingestor/internal/batcher"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -129,7 +129,7 @@ func (p *Pool) processMessage(ctx context.Context, msg redis.XMessage) {
 
 	// Previously: Converted DTO to DB Model
 	// Now: Redis payload IS the DB Model (db.Check) serialized as JSON (snake_case)
-	
+
 	// Send the valid result to the batcher
 	p.batcher.Add(result)
 	p.ackMessage(ctx, msg.ID)

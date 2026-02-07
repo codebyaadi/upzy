@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/libs/db"
+	"github.com/codebyaadi/upzy/libs/logger"
 	"github.com/codebyaadi/upzy/services/probe/internal/checker"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"

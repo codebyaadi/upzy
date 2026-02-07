@@ -40,12 +40,12 @@ func ExecuteHTTPCheck(job db.GetMonitorJobRow, region string) db.Check {
 	requestID := uuid.New().String()
 
 	result := db.Check{
-		Timestamp:      pgtype.Timestamptz{Time: startTime.UTC(), Valid: true},
-		MonitorID:      job.ID,
-		RequestID:      requestID,
-		TraceID:        job.TraceID,
-		ProbeRegion:    region,
-		IsSuccess:      false,
+		Timestamp:   pgtype.Timestamptz{Time: startTime.UTC(), Valid: true},
+		MonitorID:   job.ID,
+		RequestID:   requestID,
+		TraceID:     job.TraceID,
+		ProbeRegion: region,
+		IsSuccess:   false,
 	}
 
 	jar := tls_client.NewCookieJar()
@@ -73,19 +73,19 @@ func ExecuteHTTPCheck(job db.GetMonitorJobRow, region string) db.Check {
 	var lastErr error
 
 	for attempt := 1; attempt <= maxRetries; attempt++ {
-		// Use HTTPMethod directly because it's a string type in generated struct if we mapped it, 
+		// Use HTTPMethod directly because it's a string type in generated struct if we mapped it,
 		// but in DB it's NullHttpMethod. Wait, job_queue.sql says:
 		// http_method,
-		// And generated struct has: HttpMethod NullHttpMethod. 
+		// And generated struct has: HttpMethod NullHttpMethod.
 		// We need to access .HttpMethod and maybe string() it?
 		// Actually NullHttpMethod is struct { HttpMethod HttpMethod; Valid bool }.
 		// And HttpMethod is string-like enum.
-		
+
 		method := "GET"
 		if job.HttpMethod.Valid {
 			method = string(job.HttpMethod.HttpMethod)
 		}
-		
+
 		body := ""
 		if job.RequestBody.Valid {
 			body = job.RequestBody.String

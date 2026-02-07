@@ -48,11 +48,11 @@ func main() {
 
 	// Configure and create the worker pool
 	poolCfg := worker.PoolConfig{
-		StreamName:      "results:http",
-		GroupName:       "ingestor-group",
-		WorkerCount:     cfg.Ingestor.WorkerCount,
-		BatchSize:       cfg.Ingestor.BatchSize,
-		BatchTimeout:    time.Duration(cfg.Ingestor.BatchTimeoutSec) * time.Second,
+		StreamName:   "results:http",
+		GroupName:    "ingestor-group",
+		WorkerCount:  cfg.Ingestor.WorkerCount,
+		BatchSize:    cfg.Ingestor.BatchSize,
+		BatchTimeout: time.Duration(cfg.Ingestor.BatchTimeoutSec) * time.Second,
 	}
 
 	pool := worker.NewPool(poolCfg, log, redisClient, pgPool)
