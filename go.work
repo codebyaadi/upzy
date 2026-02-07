@@ -4,5 +4,4 @@ use (
 	./pkg/datastore
 	./pkg/logger
 	./pkg/utils
-	./services/probe
 )
