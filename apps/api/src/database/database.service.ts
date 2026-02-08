@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Database } from '@upzy/db';
+import type { Database } from '@upzy/db/drizzle';
 import { DB_PROVIDER } from './database.provider';
 
 @Injectable()

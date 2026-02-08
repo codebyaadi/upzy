@@ -6,16 +6,12 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  closeAllDatabaseConnections,
-  createDatabase,
-  createRedisClient,
-  RedisClientType,
-} from '@upzy/db';
 import { DatabaseService } from './database.service';
 import { EnvType } from '../config/env.schema';
 import { DB_PROVIDER, REDIS_PROVIDER } from './database.provider';
 import { RedisService } from './redis.service';
+import { closeAllDatabaseConnections, createDatabase } from '@upzy/db/drizzle';
+import { createRedisClient, type RedisClientType } from '@upzy/db/redis';
 
 const logger = new Logger('DatabaseModule');
 

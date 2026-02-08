@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { faker } from "@faker-js/faker";
 import { v7 as uuidv7 } from "uuid";
 import { closeAllDatabaseConnections, getDefaultDb } from "./drizzle";

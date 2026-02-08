@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { REDIS_PROVIDER } from './database.provider';
-import { RedisClientType } from '@upzy/db';
+import type { RedisClientType } from '@upzy/db/redis';
 
 @Injectable()
 export class RedisService {

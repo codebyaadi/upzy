@@ -2,6 +2,7 @@
   "name": "@upzy/db",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "tsup",
     "dev": "bun run db:studio",
@@ -24,19 +25,22 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
-    "drizzle-orm": "^0.44.3",
+    "drizzle-orm": "^0.45.1",
     "pg": "^8.16.0",
-    "redis": "^5.8.0"
+    "redis": "^5.8.0",
+    "uuid": "^13.0.0"
   },
-  "main": "./dist/index.js",
-  "types": "./src/index.ts",
   "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "default": "./dist/index.js"
+    "./drizzle": {
+      "types": "./dist/drizzle.d.ts",
+      "default": "./dist/drizzle.js"
+    },
+    "./redis": {
+      "types": "./dist/redis.d.ts",
+      "default": "./dist/redis.js"
     },
     "./schema/*": {
-      "types": "./src/schema/*.ts",
+      "types": "./dist/schema/*.d.ts",
       "default": "./dist/schema/*.js"
     }
   }

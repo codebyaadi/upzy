@@ -1,5 +1,5 @@
 import { Controller, Get, HttpStatus, Req, Res } from '@nestjs/common';
-import { FastifyRequest, FastifyReply } from 'fastify';
+import type { FastifyRequest, FastifyReply } from 'fastify';
 import { HealthService } from './health.service';
 import { DatabaseService } from '../database/database.service';
 

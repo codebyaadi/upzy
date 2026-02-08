@@ -3,8 +3,8 @@
   "display": "Nest.js",
   "extends": "./base.json",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,

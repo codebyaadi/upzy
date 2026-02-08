@@ -1,6 +1,6 @@
 import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import * as schema from "./schema"; // Your Drizzle schema definitions
+import * as schema from "./schema";
 
 export type Database = NodePgDatabase<typeof schema>;
 
@@ -81,3 +81,5 @@ export async function closeAllDatabaseConnections(): Promise<void> {
   }
   console.log("All database connections processed.");
 }
+
+export * from "drizzle-orm";

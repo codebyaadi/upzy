@@ -2,17 +2,17 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   and,
-  Database,
   eq,
   inArray,
   isNull,
   lte,
-  monitors,
   or,
-  RedisClientType,
-} from '@upzy/db';
-import { sql } from '@upzy/db';
-import { generateUUIDv7 } from '@upzy/utils';
+  sql,
+  type Database,
+} from '@upzy/db/drizzle';
+import type { RedisClientType } from '@upzy/db/redis';
+import { monitors } from '@upzy/db/schema/monitor';
+// import { generateUUIDv7 } from '@upzy/utils';
 import { DB_PROVIDER, REDIS_PROVIDER } from 'src/database/database.provider';
 
 @Injectable()
@@ -61,7 +61,7 @@ export class SchedulerService {
       let jobsPublished = 0;
 
       for (const monitor of dueMonitors) {
-        const traceId = generateUUIDv7();
+        const traceId = 'temp'; // generateUUIDv7();
 
         this.logger.log(
           `Scheduling run for monitor ${monitor.id} with traceId: ${traceId}`,

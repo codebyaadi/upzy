@@ -1,5 +1,7 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
-import { Database, schema } from '@upzy/db';
+import { type Database } from '@upzy/db/drizzle';
+import { tests } from '@upzy/db/schema/test';
+
 import { sendEmail } from '@upzy/email';
 
 interface CreateTestData {
@@ -27,7 +29,7 @@ export class TestsService {
       });
 
       const [result] = await this.db
-        .insert(schema.tests)
+        .insert(tests)
         .values({
           id: data.id,
           name: data.name,
@@ -62,7 +64,7 @@ export class TestsService {
     this.logger.debug('Fetching all tests from database');
 
     try {
-      const results = await this.db.select().from(schema.tests);
+      const results = await this.db.select().from(tests);
 
       this.logger.debug(`Found ${results.length} tests`);
       return results;

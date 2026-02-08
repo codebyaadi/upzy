@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { sendEmail } from '@upzy/email';
+// import { sendEmail } from '@upzy/email';
 import { DatabaseService } from '../database/database.service';
 
 @Injectable()

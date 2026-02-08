@@ -1,9 +1,10 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateMonitorDto } from '@upzy/validators';
-import { Database, monitors } from '@upzy/db';
-import { generateSlug } from '@upzy/utils';
+// import { generateSlug } from '@upzy/utils';
 import { UpdateMonitorDto } from './dto/update-monitor.dto';
 import { DB_PROVIDER } from '../database/database.provider';
+import { type Database } from '@upzy/db/drizzle';
+import { monitors } from '@upzy/db/schema/monitor';
 
 @Injectable()
 export class MonitorService {
@@ -22,7 +23,7 @@ export class MonitorService {
     }
 
     try {
-      const monitorSlug = await generateSlug(createMonitorDto.name);
+      const monitorSlug = 'temp'; // await generateSlug(createMonitorDto.name);
 
       await this.db.insert(monitors).values({
         ...createMonitorDto,

@@ -1,8 +1,8 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src"],
-  format: ["esm", "cjs"],
+  entry: ["src/drizzle.ts", "src/redis.ts", "src/schema/*.ts"],
+  format: ["esm"],
   splitting: false,
   dts: true,
   sourcemap: true,

@@ -8,8 +8,8 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { monitorInputSchema, CreateMonitorDto } from '@upzy/validators';
-import { Session, User } from '@upzy/auth';
+import { monitorInputSchema, type CreateMonitorDto } from '@upzy/validators';
+import type { Session, User } from '@upzy/auth/types';
 import { MonitorService } from './monitor.service';
 import { UpdateMonitorDto } from './dto/update-monitor.dto';
 import { AuthGuard } from '../auth/auth.guard';
