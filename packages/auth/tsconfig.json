@@ -1,6 +1,8 @@
 {
   "extends": "@upzy/typescript-config/base.json",
   "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
       "@upzy/auth/*": ["./src/*"]

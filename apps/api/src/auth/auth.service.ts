@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { FastifyRequest, FastifyReply } from 'fastify';
-import { Auth, AuthConfig, createAuth } from '@upzy/auth';
+import { Auth, AuthConfig, createAuth } from '@upzy/auth/server';
 import { EnvType } from '../config/env.schema';
 
 @Injectable()
@@ -99,7 +99,7 @@ export class AuthService {
     return session !== null;
   }
 
-  getAuthInstance() {
+  getAuthInstance(): Auth {
     return this.auth;
   }
 }

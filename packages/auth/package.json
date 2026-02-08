@@ -2,6 +2,7 @@
   "name": "@upzy/auth",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "tsup",
     "auth:generate": "bunx @better-auth/cli generate --config src/server.ts --output ../db/src/schema/auth.ts",
@@ -16,24 +17,22 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
-    "better-auth": "^1.2.8",
     "@upzy/db": "workspace:*",
-    "@upzy/email": "workspace:*"
+    "@upzy/email": "workspace:*",
+    "better-auth": "^1.2.8"
   },
-  "main": "./dist/index.js",
-  "types": "./src/index.ts",
   "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
     "./server": {
-      "types": "./src/server.ts",
+      "types": "./dist/server.d.ts",
       "default": "./dist/server.js"
     },
     "./client": {
-      "types": "./src/client.ts",
+      "types": "./dist/client.d.ts",
       "default": "./dist/client.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./dist/types.js"
     }
   }
 }

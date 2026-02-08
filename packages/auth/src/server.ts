@@ -1,9 +1,10 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { magicLink, organization } from "better-auth/plugins";
-import { createDatabase, authSchema, type Database } from "@upzy/db";
 import { sendEmail } from "@upzy/email";
 import { getActiveOrganization } from "./utils";
+import * as authSchema from "@upzy/db/schema/auth";
+import { createDatabase, Database } from "@upzy/db/drizzle";
 
 export interface AuthConfig {
   databaseUrl: string; // The connection string is provided by the consumer

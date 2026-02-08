@@ -1,7 +1,6 @@
-import { eq, schema, Database } from "@upzy/db";
-
-const members = schema.members;
-const organizations = schema.organizations;
+import { Database } from "@upzy/db/drizzle";
+import { members, organizations } from "@upzy/db/schema/auth";
+import { eq } from "@upzy/db/drizzle";
 
 export async function getActiveOrganization(userId: string, db: Database) {
   const result = await db

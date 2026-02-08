@@ -7,7 +7,7 @@ export default defineConfig({
     "src/lib/*.ts",
     "src/templates/*.tsx",
   ],
-  format: ["esm", "cjs"],
+  format: ["esm"],
   target: "node18",
   outDir: "dist",
   dts: true,

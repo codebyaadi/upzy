@@ -5,7 +5,9 @@
     "paths": {
       "@upzy/email/*": ["./src/*"]
     },
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]

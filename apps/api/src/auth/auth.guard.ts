@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { FastifyRequest } from 'fastify';
-import { Session, User } from '@upzy/auth';
+import { Session, User } from '@upzy/auth/types';
 import { AuthService } from './auth.service';
 
 // Extend FastifyRequest to include user and session properties
