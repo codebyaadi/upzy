@@ -23,7 +23,7 @@ export function NavMenu() {
           <NavigationMenuTrigger
             className={cn(
               navigationMenuTriggerStyle({ variant: "transparent" }),
-              "text-muted-foreground px-2 text-xs font-medium"
+              "text-muted-foreground px-2 text-xs font-medium",
             )}
           >
             Solutions
@@ -63,7 +63,7 @@ export function NavMenu() {
           <NavigationMenuTrigger
             className={cn(
               navigationMenuTriggerStyle({ variant: "transparent" }),
-              "text-muted-foreground px-2 text-xs font-medium"
+              "text-muted-foreground px-2 text-xs font-medium",
             )}
           >
             Features
@@ -87,7 +87,7 @@ export function NavMenu() {
           <NavigationMenuTrigger
             className={cn(
               navigationMenuTriggerStyle({ variant: "transparent" }),
-              "text-muted-foreground px-2 text-xs font-medium"
+              "text-muted-foreground px-2 text-xs font-medium",
             )}
           >
             Resources
@@ -108,7 +108,7 @@ export function NavMenu() {
             <NavigationMenuLink
               className={cn(
                 navigationMenuTriggerStyle({ variant: "transparent" }),
-                "text-muted-foreground px-2 text-xs font-medium"
+                "text-muted-foreground px-2 text-xs font-medium",
               )}
             >
               Documentation
@@ -131,7 +131,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
-            className
+            className,
           )}
           {...props}
         >

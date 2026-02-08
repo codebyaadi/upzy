@@ -142,7 +142,7 @@ export function HttpConfigurationForm({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {STATUS_CODES.filter(
-                    (code) => !(field.value ?? []).includes(code)
+                    (code) => !(field.value ?? []).includes(code),
                   ).map((code) => (
                     <Button
                       key={code}

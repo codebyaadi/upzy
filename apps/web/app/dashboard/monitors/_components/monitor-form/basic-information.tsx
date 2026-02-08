@@ -127,7 +127,7 @@ export function BasicInformationForm({
                         field.onChange(e.target.value);
                       } else {
                         field.onChange(
-                          `https://${e.target.value.replace(/^https?:\/\//, "")}`
+                          `https://${e.target.value.replace(/^https?:\/\//, "")}`,
                         );
                       }
                     }}

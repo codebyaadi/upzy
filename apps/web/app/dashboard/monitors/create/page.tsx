@@ -66,7 +66,7 @@ export default function CreateMonitorPage() {
     try {
       const result = await http.post<{ success: boolean; message: string }>(
         "/monitor",
-        data
+        data,
       );
 
       console.log("API Success:", result.message);
@@ -104,7 +104,7 @@ export default function CreateMonitorPage() {
     const currentTags = form.getValues("tags") ?? [];
     form.setValue(
       "tags",
-      currentTags.filter((tag) => tag !== tagToRemove)
+      currentTags.filter((tag) => tag !== tagToRemove),
     );
   };
 
@@ -119,7 +119,7 @@ export default function CreateMonitorPage() {
     const currentCodes = form.getValues("expectedStatusCodes") ?? [];
     form.setValue(
       "expectedStatusCodes",
-      currentCodes.filter((c) => c !== code)
+      currentCodes.filter((c) => c !== code),
     );
   };
 

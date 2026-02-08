@@ -49,7 +49,7 @@ export function MonitoringRegionsForm({ form }: MonitoringRegionsFormProps) {
                             field.onChange([...currentValue, region.id]);
                           } else {
                             field.onChange(
-                              currentValue.filter((r) => r !== region.id)
+                              currentValue.filter((r) => r !== region.id),
                             );
                           }
                         }}

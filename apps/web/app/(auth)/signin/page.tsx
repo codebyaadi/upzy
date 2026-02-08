@@ -46,7 +46,7 @@ export default function SignIn() {
 
       if (error) {
         setErrorMessage(
-          error.message || "Failed to send magic link. Please try again."
+          error.message || "Failed to send magic link. Please try again.",
         );
         return;
       }
