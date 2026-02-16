@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
   entry: [
@@ -11,7 +11,6 @@ export default defineConfig({
   target: "node18",
   outDir: "dist",
   dts: true,
-  splitting: false,
   clean: true,
   sourcemap: true,
   shims: false,

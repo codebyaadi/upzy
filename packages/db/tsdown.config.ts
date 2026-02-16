@@ -1,9 +1,8 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: ["src/client.ts", "src/server.ts", "src/types.ts"],
+  entry: ["src/drizzle.ts", "src/redis.ts", "src/schema/*.ts"],
   format: ["esm"],
-  splitting: false,
   dts: true,
   sourcemap: true,
   clean: true,

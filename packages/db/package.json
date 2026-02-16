@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "dev": "bun run db:studio",
     "db:generate": "bunx drizzle-kit generate",
     "db:migrate": "bunx drizzle-kit migrate",
@@ -20,7 +20,7 @@
     "@upzy/eslint-config": "workspace:*",
     "@upzy/typescript-config": "workspace:*",
     "drizzle-kit": "^0.31.1",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.20.3",
     "tsx": "^4.19.4",
     "typescript": "5.7.3"
   },
@@ -32,16 +32,16 @@
   },
   "exports": {
     "./drizzle": {
-      "types": "./dist/drizzle.d.ts",
-      "default": "./dist/drizzle.js"
+      "types": "./dist/drizzle.d.mts",
+      "default": "./dist/drizzle.mjs"
     },
     "./redis": {
-      "types": "./dist/redis.d.ts",
-      "default": "./dist/redis.js"
+      "types": "./dist/redis.d.mts",
+      "default": "./dist/redis.mjs"
     },
     "./schema/*": {
-      "types": "./dist/schema/*.d.ts",
-      "default": "./dist/schema/*.js"
+      "types": "./dist/schema/*.d.mts",
+      "default": "./dist/schema/*.mjs"
     }
   }
 }

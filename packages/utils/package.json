@@ -3,29 +3,29 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsup"
+    "build": "tsdown"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@upzy/eslint-config": "workspace:*",
     "@upzy/typescript-config": "workspace:*",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.20.3",
     "typescript": "5.7.3"
   },
   "dependencies": {
     "nanoid": "^5.1.5",
     "uuid": "^11.1.0"
   },
-  "main": "./dist/index.js",
-  "types": "./src/index.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     },
     "./*": {
-      "types": "./src/*.ts",
-      "default": "./dist/*.js"
+      "types": "./dist/*.d.mts",
+      "default": "./dist/*.mjs"
     }
   }
 }
