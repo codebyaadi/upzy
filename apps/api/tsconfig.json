@@ -5,7 +5,9 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "paths": {
-      "@upzy/auth/*": ["../../packages/auth/dist/*"]
+      "@upzy/auth/*": ["../../packages/auth/dist/*"],
+      "@upzy/email": ["../../packages/email/dist/index.mjs"],
+      "@upzy/email/*": ["../../packages/email/dist/*"]
     }
   }
 }
