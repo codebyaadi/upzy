@@ -8,6 +8,7 @@
     "dev": "email dev --dir ./src/templates --port 3001"
   },
   "devDependencies": {
+    "@react-email/preview-server": "5.2.8",
     "@types/bun": "latest",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19.2.13",
@@ -15,17 +16,17 @@
     "@upzy/eslint-config": "workspace:^",
     "@upzy/typescript-config": "workspace:*",
     "@upzy/ui": "workspace:*",
-    "react-email": "4.0.15",
+    "react-email": "5.2.8",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "5.7.3"
   },
   "dependencies": {
-    "@react-email/components": "0.0.41",
-    "@react-email/render": "^2.0.4",
+    "@react-email/components": "1.0.7",
+    "@react-email/render": "2.0.4",
     "nodemailer": "^7.0.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
