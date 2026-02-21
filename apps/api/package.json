@@ -2,6 +2,7 @@
   "name": "api",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nest build",
     "start": "nest start",
@@ -18,7 +19,9 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-fastify": "^11.1.14",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
