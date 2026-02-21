@@ -1,0 +1,19 @@
+{
+  "name": "@upzy/auth",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsdown",
+    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@upzy/db": "workspace:*",
+    "better-auth": "^1.4.18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@upzy/typescript-config": "workspace:*",
+    "tsdown": "^0.20.3",
+    "typescript": "5.9.2"
+  }
+}
