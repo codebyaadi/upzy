@@ -1,0 +1,35 @@
+{
+  "name": "@upzy/db",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "format": "prisma format"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "dotenv": "^17.3.1",
+    "pg": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/pg": "^8.16.0",
+    "@upzy/typescript-config": "workspace:*",
+    "prisma": "^7.4.0",
+    "tsdown": "^0.20.3",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.2"
+  }
+}
