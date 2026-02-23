@@ -1,3 +1,25 @@
 packages:
   - "apps/*"
   - "packages/*"
+
+catalogs:
+  db:
+    "pg": "8.18.0"
+    "@types/pg": "8.16.0"
+    "@prisma/adapter-pg": "7.4.0"
+    "@prisma/client": "^7.4.0"
+  dev:
+    "typescript": "5.9.2"
+    "@types/node": "^22.15.3"
+    "oxlint": "^1.48.0"
+    "tsdown": "^0.20.3"
+    "tsx": "^4.21.0"
+  ui:
+    "@tailwindcss/postcss": "^4"
+    "tailwindcss": "^4"
+    "@types/react": "19.2.2"
+    "@types/react-dom": "19.2.2"
+    "react": "^19.2.0"
+    "react-dom": "^19.2.0"
+    "@hugeicons/core-free-icons": "^3.1.1"
+    "@hugeicons/react": "^1.1.5"

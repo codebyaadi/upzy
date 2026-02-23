@@ -2,18 +2,36 @@
   "name": "@upzy/auth",
   "version": "1.0.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./client": {
+      "types": "./dist/client.d.mts",
+      "import": "./dist/client.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.mts",
+      "import": "./dist/server.mjs"
+    },
+    "./types": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/types.mjs"
+    }
+  },
   "scripts": {
     "build": "tsdown",
-    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/prisma/schema.prisma"
+    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/prisma/auth.prisma"
   },
   "dependencies": {
     "@upzy/db": "workspace:*",
     "better-auth": "^1.4.18"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3",
+    "@types/node": "catalog:dev",
     "@upzy/typescript-config": "workspace:*",
-    "tsdown": "^0.20.3",
-    "typescript": "5.9.2"
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }
