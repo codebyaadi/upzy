@@ -22,7 +22,8 @@
   },
   "scripts": {
     "build": "tsdown",
-    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/prisma/auth.prisma"
+    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/prisma/auth.prisma",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@upzy/db": "workspace:*",

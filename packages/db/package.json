@@ -15,7 +15,8 @@
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "format": "prisma format"
+    "format": "prisma format",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/adapter-pg": "catalog:db",
