@@ -7,7 +7,13 @@ import { AuthModule } from "./auth/auth.module.js";
 import { HealthModule } from "./health/health.module.js";
 
 @Module({
-  imports: [ConfigModule.forRoot(), HealthModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    HealthModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

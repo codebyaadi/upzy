@@ -20,7 +20,6 @@ export class HealthController {
   @Get()
   @HealthCheck()
   async check() {
-    console.log(process.env.DATABASE_URL);
     await this.prismaService.$queryRaw`SELECT 1`; // Example query
     return this.health.check([
       () => this.prismaIndicator.pingCheck("database", this.prismaService),

@@ -1,11 +1,12 @@
 import { Controller, All, Req, Res, Logger } from "@nestjs/common";
-import { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
 import { AuthService } from "./auth.service.js";
 
 @Controller("api/auth")
 export class AuthController {
   private readonly logger = new Logger(AuthController.name);
+  constructor(private readonly authService: AuthService) {}
 
   @All("*")
   async handleAuth(@Req() request: FastifyRequest, @Res() reply: FastifyReply) {
@@ -33,6 +34,16 @@ export class AuthController {
             ? JSON.stringify(request.body)
             : undefined,
       });
+
+      const response = await this.authService.auth.handler(req);
+
+      reply.status(response.status);
+      response.headers.forEach((value, key) => {
+        reply.header(key, value);
+      });
+
+      const body = await response.text();
+      return reply.send(body);
     } catch (error) {
       this.logger.error("Authentication Error:", error);
       return reply.status(500).send({

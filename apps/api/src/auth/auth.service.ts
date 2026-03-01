@@ -1,16 +1,17 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, OnModuleInit } from "@nestjs/common";
+import { createAuth } from "@upzy/auth/server";
+import { Auth } from "@upzy/auth/types";
+
+import { PrismaService } from "../prisma/prisma.service.js";
 
 @Injectable()
-export class AuthService {
-  findAll() {
-    return `This action returns all auth`;
-  }
+export class AuthService implements OnModuleInit {
+  public auth: Auth;
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  onModuleInit() {
+    // ✅ Auth only initializes once the PrismaService is fully ready
+    this.auth = createAuth(this.prisma);
   }
 }
