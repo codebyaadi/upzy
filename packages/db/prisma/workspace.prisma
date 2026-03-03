@@ -1,0 +1,16 @@
+model Workspace {
+  id        String       @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  orgId     String
+  name      String
+  createdAt DateTime     @default(now())
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  monitors  Monitor[]
+  scans     Scan[]
+  assets    Asset[]
+  alerts    Alert[]
+  incidents Incident[]
+  webhooks  Webhook[]
+
+  @@index([orgId])
+}

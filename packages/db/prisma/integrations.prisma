@@ -1,0 +1,9 @@
+model Webhook {
+  id          String    @id @default(cuid())
+  workspaceId String
+  url         String
+  secret      String?
+  createdAt   DateTime  @default(now())
+  events      Json
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}

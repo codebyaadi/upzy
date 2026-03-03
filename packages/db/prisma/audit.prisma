@@ -1,0 +1,12 @@
+model AuditLog {
+  id             String       @id @default(cuid())
+  organizationId String
+  userId         String?
+  action         String
+  resourceType   String
+  resourceId     String?
+  payload        Json?
+  timestamp      DateTime     @default(now())
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}

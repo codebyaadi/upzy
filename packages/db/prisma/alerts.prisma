@@ -1,0 +1,44 @@
+model Alert {
+  id          String       @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String
+  type        AlertType
+  channel     AlertChannel
+  target      String
+  createdAt   DateTime     @default(now())
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model Incident {
+  id          String         @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String
+  type        IncidentType
+  status      IncidentStatus
+  createdAt   DateTime       @default(now())
+  resolvedAt  DateTime?
+  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+enum AlertType {
+  monitor
+  scan
+  custom
+}
+
+enum AlertChannel {
+  email
+  webhook
+  slack
+  sms
+}
+
+enum IncidentType {
+  uptime
+  security
+  custom
+}
+
+enum IncidentStatus {
+  open
+  acknowledged
+  resolved
+}

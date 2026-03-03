@@ -1,0 +1,53 @@
+model Scan {
+  id          String     @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String
+  name        String
+  type        ScanType
+  status      ScanStatus
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  triggerdBy  String?
+  workspace   Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  findings Finding[]
+}
+
+model Finding {
+  id          String        @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  scanId      String
+  workspaceId String
+  severity    Severity
+  title       String
+  description String
+  status      FindingStatus
+  createdAt   DateTime      @default(now())
+  scan        Scan          @relation(fields: [scanId], references: [id], onDelete: Cascade)
+}
+
+enum ScanType {
+  assetDiscovery
+  portScan
+  vulnScan
+  custom
+}
+
+enum ScanStatus {
+  queued
+  running
+  completed
+  failed
+}
+
+enum Severity {
+  critical
+  high
+  medium
+  low
+  info
+}
+
+enum FindingStatus {
+  open
+  resolved
+  ignored
+}

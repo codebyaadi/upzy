@@ -1,0 +1,39 @@
+model Monitor {
+  id          String      @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String
+  name        String
+  type        MonitorType
+  target      String
+  interval    Int
+  active      Boolean
+  workspace   Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now())
+
+  monitorChecks MonitorCheck[]
+
+  @@index([workspaceId])
+}
+
+model MonitorCheck {
+  id         String      @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  monitorId  String
+  status     CheckStatus
+  responseMs Int?
+  timestamp  DateTime    @default(now())
+  region     String?
+  monitor    Monitor     @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+}
+
+enum MonitorType {
+  http
+  tcp
+  dns
+  ssl
+  synthetic
+}
+
+enum CheckStatus {
+  up
+  down
+  unknown
+}

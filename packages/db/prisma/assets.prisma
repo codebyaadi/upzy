@@ -1,0 +1,10 @@
+model Asset {
+  id          String    @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String
+  type        String
+  value       String
+  meta        Json?
+  firstSeen   DateTime  @default(now())
+  lastSeen    DateTime  @updatedAt
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}

@@ -11,6 +11,7 @@ model User {
   teammembers   TeamMember[]
   members       Member[]
   invitations   Invitation[]
+  auditLogs     AuditLog[]
 
   @@unique([email])
   @@map("user")
@@ -76,6 +77,9 @@ model Organization {
   teams       Team[]
   members     Member[]
   invitations Invitation[]
+  workspaces  Workspace[]
+  apiKeys     ApiKey[]
+  auditLogs   AuditLog[]
 
   @@unique([slug])
   @@map("organization")
