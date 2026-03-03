@@ -1,9 +1,11 @@
-model Webhook {
-  id          String    @id @default(cuid())
-  workspaceId String
+model Webhooks {
+  id          String     @id @default(cuid())
+  workspaceId String     @map("workspace_id") @db.Uuid
   url         String
   secret      String?
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime   @default(now()) @map("created_at")
   events      Json
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspaces @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("webhooks")
 }

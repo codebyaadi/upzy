@@ -1,0 +1,17 @@
+model Workspaces {
+  id        String        @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  orgId     String        @map("org_id")
+  name      String
+  createdAt DateTime      @default(now()) @map("created_at")
+  org       Organizations @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  monitors  Monitors[] // Updated to plural model
+  scans     Scans[] // Updated to plural model
+  assets    Assets[] // Updated to plural model
+  alerts    Alerts[] // Updated to plural model
+  incidents Incidents[] // Updated to plural model
+  webhooks  Webhooks[] // Updated to plural model
+
+  @@index([orgId])
+  @@map("workspaces")
+}

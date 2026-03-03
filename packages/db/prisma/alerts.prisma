@@ -1,21 +1,25 @@
-model Alert {
+model Alerts {
   id          String       @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  workspaceId String
+  workspaceId String       @map("workspace_id") @db.Uuid
   type        AlertType
   channel     AlertChannel
   target      String
-  createdAt   DateTime     @default(now())
-  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  workspace   Workspaces   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("alerts")
 }
 
-model Incident {
+model Incidents {
   id          String         @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  workspaceId String
+  workspaceId String         @map("workspace_id") @db.Uuid
   type        IncidentType
   status      IncidentStatus
-  createdAt   DateTime       @default(now())
-  resolvedAt  DateTime?
-  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  resolvedAt  DateTime?      @map("resolved_at")
+  workspace   Workspaces     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("incidents")
 }
 
 enum AlertType {

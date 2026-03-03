@@ -9,7 +9,11 @@ export const createAuth = (prisma: PrismaClient) => {
     trustedOrigins: ["http://localhost:3001"],
     database: prismaAdapter(prisma, {
       provider: "postgresql",
+      usePlural: true,
     }),
+    experimental: {
+      joins: true,
+    },
     emailAndPassword: { enabled: true, autoSignIn: true },
     plugins: [
       organization({
@@ -18,3 +22,5 @@ export const createAuth = (prisma: PrismaClient) => {
     ],
   });
 };
+
+export const auth = createAuth({} as any);

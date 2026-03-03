@@ -1,0 +1,11 @@
+model ApiKeys {
+  id             String        @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  organizationId String        @map("organization_id")
+  name           String
+  hashedKey      String        @map("hashed_key")
+  role           String
+  createdAt      DateTime      @default(now()) @map("created_at")
+  organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("api_keys")
+}

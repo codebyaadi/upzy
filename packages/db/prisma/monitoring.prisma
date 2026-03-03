@@ -1,27 +1,29 @@
-model Monitor {
+model Monitors {
   id          String      @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  workspaceId String
+  workspaceId String      @map("workspace_id") @db.Uuid
   name        String
   type        MonitorType
   target      String
   interval    Int
   active      Boolean
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  createdAt   DateTime    @default(now())
+  workspace   Workspaces  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now()) @map("created_at")
 
-  monitorChecks MonitorCheck[]
+  monitorChecks MonitorChecks[]
 
-  @@index([workspaceId])
+  @@map("monitors")
 }
 
-model MonitorCheck {
+model MonitorChecks {
   id         String      @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  monitorId  String
+  monitorId  String      @map("monitor_id") @db.Uuid
   status     CheckStatus
-  responseMs Int?
-  timestamp  DateTime    @default(now())
+  responseMs Int?        @map("response_ms")
+  createdAt  DateTime    @default(now()) @map("created_at")
   region     String?
-  monitor    Monitor     @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  monitor    Monitors    @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+
+  @@map("monitor_checks")
 }
 
 enum MonitorType {

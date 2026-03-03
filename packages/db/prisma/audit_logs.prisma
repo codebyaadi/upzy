@@ -1,0 +1,14 @@
+model AuditLogs {
+  id             String        @id @default(cuid())
+  organizationId String        @map("organization_id")
+  userId         String?       @map("user_id")
+  action         String
+  resourceType   String        @map("resource_type")
+  resourceId     String?       @map("resource_id")
+  payload        Json?
+  createdAt      DateTime      @default(now()) @map("created_at")
+  user           Users?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}

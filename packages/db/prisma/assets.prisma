@@ -1,10 +1,12 @@
-model Asset {
-  id          String    @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  workspaceId String
+model Assets {
+  id          String     @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  workspaceId String     @map("workspace_id") @db.Uuid
   type        String
   value       String
   meta        Json?
-  firstSeen   DateTime  @default(now())
-  lastSeen    DateTime  @updatedAt
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  firstSeen   DateTime   @default(now()) @map("first_seen")
+  lastSeen    DateTime   @updatedAt @map("last_seen")
+  workspace   Workspaces @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("assets")
 }
