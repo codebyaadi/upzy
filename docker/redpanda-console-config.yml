@@ -1,0 +1,9 @@
+kafka:
+  brokers:
+    - redpanda:9092
+
+redpanda:
+  adminApi:
+    enabled: true
+    urls:
+      - http://redpanda:9644
