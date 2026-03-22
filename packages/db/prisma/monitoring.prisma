@@ -6,11 +6,16 @@ model Monitors {
   target      String
   interval    Int
   active      Boolean
+  nextRun     DateTime    @default(now()) @map("next_run")
+  bucket      Int         @default(0)
+  lastStatus  CheckStatus @default(unknown) @map("last_status")
   workspace   Workspaces  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   createdAt   DateTime    @default(now()) @map("created_at")
 
   monitorChecks MonitorChecks[]
 
+  @@index([active, bucket, nextRun])
+  @@index([workspaceId])
   @@map("monitors")
 }
 
@@ -23,6 +28,7 @@ model MonitorChecks {
   region     String?
   monitor    Monitors    @relation(fields: [monitorId], references: [id], onDelete: Cascade)
 
+  @@index([monitorId, createdAt(sort: Desc)])
   @@map("monitor_checks")
 }
 

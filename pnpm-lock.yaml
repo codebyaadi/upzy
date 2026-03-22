@@ -165,18 +165,6 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@22.15.3)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.10(@types/node@22.15.3)(typescript@5.9.2))(terser@5.46.0)(tsx@4.21.0)
 
-  apps/probes:
-    devDependencies:
-      '@types/node':
-        specifier: catalog:dev
-        version: 22.15.3
-      tsx:
-        specifier: catalog:dev
-        version: 4.21.0
-      typescript:
-        specifier: catalog:dev
-        version: 5.9.2
-
   apps/web:
     dependencies:
       '@hugeicons/core-free-icons':

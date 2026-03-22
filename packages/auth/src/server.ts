@@ -1,7 +1,7 @@
 import type { PrismaClient } from "@upzy/db";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { organization } from "better-auth/plugins";
+import { organization, openAPI } from "better-auth/plugins";
 
 export const createAuth = (prisma: PrismaClient) => {
   return betterAuth({
@@ -16,6 +16,7 @@ export const createAuth = (prisma: PrismaClient) => {
     },
     emailAndPassword: { enabled: true, autoSignIn: true },
     plugins: [
+      openAPI(),
       organization({
         teams: { enabled: true, maximumTeams: 10 },
       }),
