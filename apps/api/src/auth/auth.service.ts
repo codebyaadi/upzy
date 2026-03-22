@@ -1,17 +1,25 @@
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import { Injectable, OnModuleInit, InternalServerErrorException } from "@nestjs/common";
 import { createAuth } from "@upzy/auth/server";
-import { Auth } from "@upzy/auth/types";
+import type { Auth } from "@upzy/auth/types";
 
 import { PrismaService } from "../prisma/prisma.service.js";
 
 @Injectable()
 export class AuthService implements OnModuleInit {
-  public auth: Auth;
+  private _auth: Auth | undefined;
 
   constructor(private readonly prisma: PrismaService) {}
 
   onModuleInit() {
-    // ✅ Auth only initializes once the PrismaService is fully ready
-    this.auth = createAuth(this.prisma);
+    this._auth = createAuth(this.prisma);
+  }
+
+  get auth(): Auth {
+    if (!this._auth) {
+      throw new InternalServerErrorException(
+        "AuthService used before initialization. Ensure onModuleInit has run.",
+      );
+    }
+    return this._auth;
   }
 }
