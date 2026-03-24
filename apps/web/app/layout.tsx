@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 
 import "@/styles/globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -21,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${figtree.variable} font-sans antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
