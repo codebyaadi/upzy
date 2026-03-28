@@ -1,0 +1,24 @@
+{
+  "name": "@upzy/validator",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:dev",
+    "@upzy/typescript-config": "workspace:*",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}
