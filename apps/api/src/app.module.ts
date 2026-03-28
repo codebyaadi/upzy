@@ -8,6 +8,8 @@ import { AuthModule } from "./auth/auth.module.js";
 import { PrismaClientExceptionFilter } from "./common/filters/prisma-client-exception.filter.js";
 import { AuthGuard } from "./common/guards/auth.guard.js";
 import { HealthModule } from "./health/health.module.js";
+import { MonitorModule } from "./monitor/monitor.module.js";
+import { WorkspaceModule } from "./workspace/workspace.module.js";
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { HealthModule } from "./health/health.module.js";
     }),
     HealthModule,
     AuthModule,
+    MonitorModule,
+    WorkspaceModule,
   ],
   controllers: [AppController],
   providers: [
