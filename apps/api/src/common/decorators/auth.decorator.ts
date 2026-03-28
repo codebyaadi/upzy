@@ -1,6 +1,6 @@
-import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { createParamDecorator, ExecutionContext, UnauthorizedException } from "@nestjs/common";
 
-import type { AuthenticatedRequest } from "./auth.types.js";
+import type { AuthenticatedRequest } from "../../auth/auth.types.js";
 
 /**
  * Extracts the authenticated user from the request.
@@ -24,7 +24,13 @@ export const CurrentSession = createParamDecorator((_data: unknown, ctx: Executi
 export const CurrentOrganizationId = createParamDecorator(
   (_data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest<AuthenticatedRequest>();
-    return request.session.activeOrganizationId;
+    const orgId = request.session.activeOrganizationId;
+
+    if (!orgId) {
+      throw new UnauthorizedException("No active organization context found.");
+    }
+
+    return orgId;
   },
 );
 
@@ -33,5 +39,11 @@ export const CurrentOrganizationId = createParamDecorator(
  */
 export const CurrentTeamId = createParamDecorator((_data: unknown, ctx: ExecutionContext) => {
   const request = ctx.switchToHttp().getRequest<AuthenticatedRequest>();
-  return request.session.activeTeamId;
+  const teamId = request.session.activeTeamId;
+
+  if (!teamId) {
+    throw new UnauthorizedException("No active team context found.");
+  }
+
+  return teamId;
 });

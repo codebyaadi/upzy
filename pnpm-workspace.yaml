@@ -2,6 +2,9 @@ packages:
   - "apps/*"
   - "packages/*"
 
+catalog:
+  "zod": "^4.3.6"
+
 catalogs:
   db:
     "pg": "8.18.0"

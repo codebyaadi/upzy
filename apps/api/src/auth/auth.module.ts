@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { PrismaModule } from "src/prisma/prisma.module.js";
 
+import { AuthGuard } from "../common/guards/auth.guard.js";
 import { AuthController } from "./auth.controller.js";
-import { AuthGuard } from "./auth.guard.js";
 import { AuthService } from "./auth.service.js";
 
 @Module({

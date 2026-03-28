@@ -1,8 +1,8 @@
 import { Controller, All, Req, Res, Logger } from "@nestjs/common";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
+import { Public } from "../common/decorators/public.decorator.js";
 import { AuthService } from "./auth.service.js";
-import { Public } from "./public.decorator.js";
 
 @Public()
 @Controller("api/auth")
