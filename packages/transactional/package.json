@@ -1,0 +1,31 @@
+{
+  "name": "@upzy/transactional",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "email dev --dir ./src/emails --port 3002",
+    "build": "tsdown",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-email/components": "1.0.10",
+    "react": "catalog:ui",
+    "react-dom": "catalog:ui"
+  },
+  "devDependencies": {
+    "@react-email/preview-server": "5.2.10",
+    "@types/node": "catalog:dev",
+    "@types/react": "catalog:ui",
+    "@types/react-dom": "catalog:ui",
+    "@upzy/typescript-config": "workspace:*",
+    "react-email": "5.2.10",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}
