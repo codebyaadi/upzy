@@ -10,7 +10,8 @@ catalogs:
     "pg": "8.18.0"
     "@types/pg": "8.16.0"
     "@prisma/adapter-pg": "7.4.0"
-    "@prisma/client": "^7.4.0"
+    "@prisma/client": "7.4.0"
+    "prisma": "7.4.0"
   dev:
     "typescript": "5.9.2"
     "@types/node": "^22.15.3"

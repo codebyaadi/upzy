@@ -30,7 +30,7 @@
     "@types/node": "catalog:dev",
     "@types/pg": "catalog:db",
     "@upzy/typescript-config": "workspace:*",
-    "prisma": "^7.4.0",
+    "prisma": "catalog:db",
     "tsdown": "catalog:dev",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev"
